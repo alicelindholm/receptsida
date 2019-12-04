@@ -15,20 +15,20 @@
     <br>
     <h3>Ingredienser</h3>
     <p> Glöm inte att fylla i mängd!</p>
-
     <?php
-    $amountIngredents = 5;
-    function addIngredient()
-    {
-        echo "hej";
-    }
-    for($i=0; $i<$amountIngredents; $i++){ ?>
-        <label> Ingrediens <?=$i+1?>:</label>
-        <input type="text" name="ingredient_<?=$i+1?>" id="<?=$i?>">
+    $amountIngredients = 5;
+    for($i=0; $i<$amountIngredients; $i++){ ?>
+        <label> Ingrediens <?=$i+1?>:
+        <input type="text" name="ingredient_<?=$i+1?>" id="<?=$i+1?>">
+        </label>
         <br>
     <?php }
     ?>
-    <button type="button" onclick="<?=addIngredient()?>">Lägg till fler ingredienser</button>
+    <p><?php echo $amountIngredients;?></p>
+    <form action="<?=$amountIngredients+=1;?>">
+
+    <input class="plus" value="+" type="button">
+    </form>
     <hr>
     <h3>Instruktioner</h3>
     <label for="instruction_1">Steg 1: </label> <br>
@@ -64,6 +64,5 @@
     <input type="submit" value="Lägg till recept">
 
 </form>
-
 </body>
 </html>

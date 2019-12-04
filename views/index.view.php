@@ -11,7 +11,7 @@
 <?php
 $recipes = getAllNames();
 ?>
-<h1>Receptsida test igen igen</h1>
+<h1>Receptsida test</h1>
 <a href="newRecipe.php">Nytt recept</a>
 <hr>
 <?php
