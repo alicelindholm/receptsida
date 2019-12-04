@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <style>
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -18,7 +24,7 @@ $recipes = getAllNames();
 foreach ($recipes as $recipe) { ?>
     <br>
     <a href="recipe.view.php/?id=<?=$recipe["id"]?>"><?= $recipe["name"]; ?></a>
-    <a href="deleteRecipe.view.php/?id=<?=$recipe["id"]?>">Radera </a>
+    <a href="deleteRecipe.view.php/?id=<?=$recipe["id"]?>"><i>Radera </i></a>
 
 <?php }
 ?>
