@@ -9,10 +9,13 @@
 </head>
 <body>
 <h1> Nytt recept </h1>
-<form action="storeRecipe.php" method="post">
+
+<!-- Formuläret-->
+<form action="storeRecipe.php" method="post" enctype="multipart/form-data">
     <label for="name">Namn: </label>
-    <input type="text" name="name" id="name">
-    <br>
+    <input type="text" name="name" id="name"> <br>
+
+    <input type="file" name="img" id="img">
     <h3>Ingredienser</h3>
     <p> Glöm inte att fylla i mängd!</p>
     <div id="ingredientBox">
@@ -29,7 +32,7 @@
     <h3>Instruktioner</h3>
     <div id="instructionBox">
         <?php
-        for ($i = 0; $i < 5; $i++) { ?>
+        for ($i = 0; $i < 2; $i++) { ?>
             <label> Steg <?= $i + 1 ?>: </label> <br>
             <textarea name="instruction_<?= $i + 1 ?>" id="instruction_<?= $i + 1 ?>" rows="10" cols="70"></textarea>
 
@@ -39,12 +42,12 @@
     </div>
     <input type="button" onclick="addInstruction()" value="+"> <label for="">Lägg till instruktion</label>
     <br>
-    <input type="submit" value="Lägg till recept">
+    <button type="submit" name="submit">Lägg till recept</button>
 
 </form>
 <script>
     let amountIngredient = 5;
-    let amountInstruction = 5;
+    let amountInstruction = 2;
 
     function addIngredient() {
         amountIngredient += 1;
@@ -54,6 +57,7 @@
             alert("Du kan inte ha mer än 10 ingredienser!")
         }
     }
+
     function addInstruction() {
         amountInstruction += 1;
         if (amountInstruction < 11) {

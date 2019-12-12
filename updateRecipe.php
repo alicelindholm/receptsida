@@ -1,7 +1,5 @@
 <?php
 require "db.php";
-var_dump($_POST);
-var_dump($_FILES);
 if (isset($_POST['submit'])) {
     $img = $_FILES['img'];
     $imgName = $_FILES['img']['name'];
@@ -31,11 +29,12 @@ if (isset($_POST['submit'])) {
             echo "You cannot upload files of this type!";
         }
     } else {
-        $fileNameNew = null;
+       $img = getOneRecipe($_GET["id"])[0][0]["img"];
+       var_dump($img);
+        $fileNameNew = $img;
     }
 }
 $recipe = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
 
-storeRecipe($recipe, $fileNameNew);
-
-header("location: index.php");
+updateRecipe($_GET["id"],$recipe, $fileNameNew);
+header("location: ../");

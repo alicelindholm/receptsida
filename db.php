@@ -22,6 +22,23 @@ function runQuery($query)
     return $result;
 }
 
+function deleteRecipe($getId)
+{
+
+    $id = $getId["id"];
+    $img = getOneRecipe($id)[0][0]["img"];
+    $file = "uploads/$img";
+    $query1 = "DELETE FROM recipes WHERE id = '$id'";
+    $query2 = "DELETE FROM ingredients WHERE id = '$id'";
+    $query3 = "DELETE FROM instructions WHERE id = '$id'";
+
+    unlink($file);
+
+    runQuery($query1);
+    runQuery($query2);
+    runQuery($query3);
+}
+
 function getOneRecipe($id)
 {
     return $result = array(getOneName($id), getOneIngredients($id),
@@ -71,7 +88,55 @@ function getOneInstructions($id)
     return runQuery($query);
 }
 
-function storeRecipe($data)
+function updateRecipe($id, $data, $img)
+{
+    var_dump($id);
+    var_dump($data);
+    var_dump($img);
+    $name = $data["name"];
+    $ingredient_1 = $data['ingredient_1'] ?? null;
+    $ingredient_2 = $data['ingredient_2'] ?? null;
+    $ingredient_3 = $data['ingredient_3'] ?? null;
+    $ingredient_4 = $data['ingredient_4'] ?? null;
+    $ingredient_5 = $data['ingredient_5'] ?? null;
+    $ingredient_6 = $data['ingredient_5'] ?? null;
+    $ingredient_7 = $data['ingredient_5'] ?? null;
+    $ingredient_8 = $data['ingredient_5'] ?? null;
+    $ingredient_9 = $data['ingredient_5'] ?? null;
+    $ingredient_10 = $data['ingredient_5'] ?? null;
+    $instruction_1 = $data['instruction_1'] ?? null;
+    $instruction_2 = $data['instruction_2'] ?? null;
+    $instruction_3 = $data['instruction_3'] ?? null;
+    $instruction_4 = $data['instruction_4'] ?? null;
+    $instruction_5 = $data['instruction_5'] ?? null;
+    $instruction_6 = $data['instruction_5'] ?? null;
+    $instruction_7 = $data['instruction_5'] ?? null;
+    $instruction_8 = $data['instruction_5'] ?? null;
+    $instruction_9 = $data['instruction_5'] ?? null;
+    $instruction_10 = $data['instruction_5'] ?? null;
+
+    $query1 = "UPDATE recipes SET 
+                   name='$name',
+                   img = '$img'
+            WHERE id = $id";
+    $query2 = "UPDATE ingredients SET
+                       ingredient_1 = '$ingredient_1',
+    ingredient_2= '$ingredient_2',
+    ingredient_3= '$ingredient_3',
+    ingredient_4= '$ingredient_4',
+    ingredient_5= '$ingredient_5',
+    ingredient_6= '$ingredient_6',
+    ingredient_7= '$ingredient_7',
+    ingredient_8= '$ingredient_8',
+    ingredient_9= '$ingredient_9',
+    ingredient_10 = '$ingredient_10'
+                       WHERE id = $id";
+    runQuery($query1);
+    runQuery($query2);
+
+}
+
+function storeRecipe($data, $img)
 {
     $result = runQuery("SELECT MAX(id) FROM recipes");
     $id = $result[0]['MAX(id)'] + 1;
@@ -98,8 +163,9 @@ function storeRecipe($data)
     $instruction_10 = $data['instruction_5'] ?? null;
     echo "här:";
     $query1 = "INSERT INTO recipes VALUES(
-     $id,
-     '$name')";
+    $id,
+    '$name',
+    '$img')";
     $query2 = "INSERT INTO ingredients VALUES(
     $id,
     '$ingredient_1',
