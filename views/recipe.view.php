@@ -11,6 +11,7 @@
 
 <a href="//localhost/receptsida">Kom hem igen!</a>
 <h1><?= $recipe[0][0]["name"] ?></h1>
+<img src="../uploads/<?=$recipe[0][0]['img']?>" alt="Bild på <?=$recipe[0][0]['name']?>">
 <h2>Ingredienser</h2>
 <ul>
     <?php
