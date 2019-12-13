@@ -9,8 +9,9 @@
 </head>
 <body>
 <a href="//localhost/receptsida">Kom hem igen!</a>
+<h1>Receptsida</h1>
+<h2>Redigera <?=$recipe[0][0]["name"]?></h2>
 <?php
-var_dump($recipe);
 ?>
 <form action="../updateRecipe.php/?id=<?=$id?>" method="post" enctype="multipart/form-data">
     <input type="text" name="name" id="name" value="<?= $recipe[0][0]['name'] ?>"> <br>

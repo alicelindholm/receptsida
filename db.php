@@ -159,7 +159,7 @@ function updateRecipe($id, $data, $img)
 
 function storeRecipe($data, $img)
 {
-    $result = runQuery("SELECT MAX(id) FROM recipes");
+    $result = fetchAll("SELECT MAX(id) FROM recipes");
     $id = $result[0]['MAX(id)'] + 1;
     $name = $data['name'];
     $ingredient_1 = $data['ingredient_1'] ?? null;
