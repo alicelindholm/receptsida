@@ -16,9 +16,9 @@
     <input type="text" name="name" id="name"> <br>
 
     <input type="file" name="img" id="img">
-    <h3>Ingredienser</h3>
+    <h2>Ingredienser</h2>
     <p> Glöm inte att fylla i mängd!</p>
-    <div id="ingredientBox">
+
         <?php
         for ($i = 0; $i < 5; $i++) { ?>
             <label> Ingrediens <?= $i + 1 ?>:
@@ -27,10 +27,10 @@
             <br>
         <?php }
         ?>
-    </div>
+
+    <div id="ingredientBox"> <!-- Extra ingredienser --></div>
     <input type="button" onclick="addIngredient()" value="+"> <label for=""> Lägg till ingrediens</label>
-    <h3>Instruktioner</h3>
-    <div id="instructionBox">
+    <h2>Instruktioner</h2>
         <?php
         for ($i = 0; $i < 2; $i++) { ?>
             <label> Steg <?= $i + 1 ?>: </label> <br>
@@ -39,7 +39,7 @@
             <br>
         <?php }
         ?>
-    </div>
+    <div id="instructionBox"> <!-- Extra instruktioner --> </div>
     <input type="button" onclick="addInstruction()" value="+"> <label for="">Lägg till instruktion</label>
     <br>
     <button type="submit" name="submit">Lägg till recept</button>
