@@ -18,6 +18,14 @@ function runQuery($query)
     $db = connect();
     $stmt = $db->prepare($query);
     $stmt->execute();
+    return "success";
+}
+
+function fetchAll($query)
+{
+    $db = connect();
+    $stmt = $db->prepare($query);
+    $stmt->execute();
     $result = $stmt->fetchAll();
     return $result;
 }
@@ -55,37 +63,37 @@ function getAll()
 function getAllNames()
 {
     $query = "SELECT * FROM recipes WHERE 1";
-    return runQuery($query);
+    return fetchAll($query);
 }
 
 function getAllIngredients()
 {
     $query = "SELECT * FROM ingredients WHERE 1";
-    return runQuery($query);
+    return fetchAll($query);
 }
 
 function getAllInstructions()
 {
     $query = "SELECT * FROM instructions WHERE 1";
-    return runQuery($query);
+    return fetchAll($query);
 }
 
 function getOneName($id)
 {
     $query = "SELECT * FROM recipes WHERE id = $id";
-    return runQuery($query);
+    return fetchAll($query);
 }
 
 function getOneIngredients($id)
 {
     $query = "SELECT * FROM ingredients WHERE id = $id";
-    return runQuery($query);
+    return fetchAll($query);
 }
 
 function getOneInstructions($id)
 {
     $query = "SELECT * FROM instructions WHERE id = $id";
-    return runQuery($query);
+    return fetchAll($query);
 }
 
 function updateRecipe($id, $data, $img)
@@ -131,14 +139,27 @@ function updateRecipe($id, $data, $img)
     ingredient_9= '$ingredient_9',
     ingredient_10 = '$ingredient_10'
                        WHERE id = $id";
+    $query3 = "UPDATE instructions SET
+    instruction_1 = '$instruction_1',
+    instruction_2= '$instruction_2',
+    instruction_3= '$instruction_3',
+    instruction_4= '$instruction_4',
+    instruction_5= '$instruction_5',
+    instruction_6= '$instruction_6',
+    instruction_7= '$instruction_7',
+    instruction_8= '$instruction_8',
+    instruction_9= '$instruction_9',
+    instruction_10 = '$instruction_10'
+                       WHERE id = $id";
     runQuery($query1);
     runQuery($query2);
+    runQuery($query3);
 
 }
 
 function storeRecipe($data, $img)
 {
-    $result = runQuery("SELECT MAX(id) FROM recipes");
+    $result = fetchAll("SELECT MAX(id) FROM recipes");
     $id = $result[0]['MAX(id)'] + 1;
     $name = $data['name'];
     $ingredient_1 = $data['ingredient_1'] ?? null;

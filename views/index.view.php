@@ -33,19 +33,22 @@ $recipes = getAllNames();
         foreach ($recipes
 
                  as $recipe) { ?>
-    <!-- Lägg till bootstrap-->
-                <div class="card">
-                    <?php if($recipe["img"] != null){?>
-                        <a href="recipe.php/?id=<?= $recipe["id"] ?>"><img class="card-img-top" src="uploads/<?=$recipe["img"]?>" alt="Card image cap"></a>
-                    <?php } ?>
-                    <div class="card-body">
-                        <br>
-                        <a href="recipe.php/?id=<?= $recipe["id"] ?>"><h2
-                                    class="text-dark"><?= $recipe["name"]; ?></h2></a>
-                    </div>
-                    <div class="card-footer">
-                        <a href="editRecipe.php/?id=<?= $recipe["id"] ?>" class="btn btn-success">Redigera</a>
-                        <a href="deleteRecipe.php/?id=<?= $recipe["id"] ?>" class="btn btn-secondary"><i>Radera</i></a>
+            <!-- Lägg till bootstrap-->
+            <div class="card">
+                <?php if ($recipe["img"] != null) { ?>
+                    <a href="recipe.php/?id=<?= $recipe["id"] ?>"><img class="card-img-top"
+                                                                       src="uploads/<?= $recipe["img"] ?>"
+                                                                       alt="Card image cap"></a>
+                <?php } ?>
+                <div class="card-body">
+                    <br>
+                    <a href="recipe.php/?id=<?= $recipe["id"] ?>"><h2
+                                class="text-dark"><?= $recipe["name"]; ?></h2></a>
+                </div>
+                <div class="card-footer">
+                    <a href="editRecipe.php/?id=<?= $recipe["id"] ?>" class="btn btn-success">Redigera</a>
+                    <a onclick="return confirm('Är du säker på att du vill radera receptet?')"
+                       href="deleteRecipe.php/?id=<?= $recipe["id"] ?>" class="btn btn-secondary"><i>Radera</i></a>
                 </div>
             </div>
         <?php }

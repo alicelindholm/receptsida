@@ -1,7 +1,5 @@
 <?php
 require "db.php";
-var_dump($_POST);
-var_dump($_FILES);
 if (isset($_POST['submit'])) {
     $img = $_FILES['img'];
     $imgName = $_FILES['img']['name'];
@@ -17,7 +15,7 @@ if (isset($_POST['submit'])) {
     if ($_FILES["img"]["name"] != "") {
         if (in_array($imgActualExt, $allowed)) {
             if ($imgError === 0) {
-                if ($imgSize < 500000) {
+                if ($imgSize < 5000000) {
                     $fileNameNew = uniqid('', true) . "." . $imgActualExt;
                     $fileDestination = 'uploads/' . $fileNameNew;
                     move_uploaded_file($imgTmpName, $fileDestination);
