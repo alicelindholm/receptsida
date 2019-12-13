@@ -8,6 +8,7 @@
     <title>Nytt recept</title>
 </head>
 <body>
+<a href="./">Kom hem igen!</a>
 <h1> Nytt recept </h1>
 
 <!-- Formuläret-->

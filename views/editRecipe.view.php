@@ -17,7 +17,7 @@ var_dump($recipe);
     <?php if($recipe[0][0]["img"] != null){?>
         <img class="card-img-top" src="../uploads/<?=$recipe[0][0]['img']?>" alt="Card image cap">
     <?php } ?>
-     <input type="file" name="img" id="img" value="<?=$recipe[0][0]['img']?>"> <br>
+     <br> <input type="file" name="img" id="img" value="<?=$recipe[0][0]['img']?>"> <br>
     <?php
     for ($i = 1; $i < 11; $i++) {
         if ($recipe[1][0]['ingredient_' . $i] != "") {
