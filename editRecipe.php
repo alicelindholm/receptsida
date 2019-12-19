@@ -1,6 +1,8 @@
 <?php
 require "db.php";
-$id = $_GET["id"];
+echo "<p>Visar recept med id <strong>".$vars['id']."</strong></p>";
+var_dump($vars);
+$id = $vars["id"];
 $recipe = getOneRecipe($id);
 //Ta bort id
 $arrayShift = array_shift($recipe[1][0]);

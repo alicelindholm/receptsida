@@ -107,21 +107,21 @@ function updateRecipe($id, $data, $img)
     $ingredient_3 = $data['ingredient_3'] ?? null;
     $ingredient_4 = $data['ingredient_4'] ?? null;
     $ingredient_5 = $data['ingredient_5'] ?? null;
-    $ingredient_6 = $data['ingredient_5'] ?? null;
-    $ingredient_7 = $data['ingredient_5'] ?? null;
-    $ingredient_8 = $data['ingredient_5'] ?? null;
-    $ingredient_9 = $data['ingredient_5'] ?? null;
-    $ingredient_10 = $data['ingredient_5'] ?? null;
+    $ingredient_6 = $data['ingredient_6'] ?? null;
+    $ingredient_7 = $data['ingredient_7'] ?? null;
+    $ingredient_8 = $data['ingredient_8'] ?? null;
+    $ingredient_9 = $data['ingredient_9'] ?? null;
+    $ingredient_10 = $data['ingredient_10'] ?? null;
     $instruction_1 = $data['instruction_1'] ?? null;
     $instruction_2 = $data['instruction_2'] ?? null;
     $instruction_3 = $data['instruction_3'] ?? null;
     $instruction_4 = $data['instruction_4'] ?? null;
     $instruction_5 = $data['instruction_5'] ?? null;
-    $instruction_6 = $data['instruction_5'] ?? null;
-    $instruction_7 = $data['instruction_5'] ?? null;
-    $instruction_8 = $data['instruction_5'] ?? null;
-    $instruction_9 = $data['instruction_5'] ?? null;
-    $instruction_10 = $data['instruction_5'] ?? null;
+    $instruction_6 = $data['instruction_6'] ?? null;
+    $instruction_7 = $data['instruction_7'] ?? null;
+    $instruction_8 = $data['instruction_8'] ?? null;
+    $instruction_9 = $data['instruction_9'] ?? null;
+    $instruction_10 = $data['instruction_10'] ?? null;
 
     $query1 = "UPDATE recipes SET 
                    name='$name',
@@ -167,21 +167,22 @@ function storeRecipe($data, $img)
     $ingredient_3 = $data['ingredient_3'] ?? null;
     $ingredient_4 = $data['ingredient_4'] ?? null;
     $ingredient_5 = $data['ingredient_5'] ?? null;
-    $ingredient_6 = $data['ingredient_5'] ?? null;
-    $ingredient_7 = $data['ingredient_5'] ?? null;
-    $ingredient_8 = $data['ingredient_5'] ?? null;
-    $ingredient_9 = $data['ingredient_5'] ?? null;
-    $ingredient_10 = $data['ingredient_5'] ?? null;
+    $ingredient_6 = $data['ingredient_6'] ?? null;
+    $ingredient_7 = $data['ingredient_7'] ?? null;
+    $ingredient_8 = $data['ingredient_8'] ?? null;
+    $ingredient_9 = $data['ingredient_9'] ?? null;
+    $ingredient_10 = $data['ingredient_10'] ?? null;
+
     $instruction_1 = $data['instruction_1'] ?? null;
     $instruction_2 = $data['instruction_2'] ?? null;
     $instruction_3 = $data['instruction_3'] ?? null;
     $instruction_4 = $data['instruction_4'] ?? null;
     $instruction_5 = $data['instruction_5'] ?? null;
-    $instruction_6 = $data['instruction_5'] ?? null;
-    $instruction_7 = $data['instruction_5'] ?? null;
-    $instruction_8 = $data['instruction_5'] ?? null;
-    $instruction_9 = $data['instruction_5'] ?? null;
-    $instruction_10 = $data['instruction_5'] ?? null;
+    $instruction_6 = $data['instruction_6'] ?? null;
+    $instruction_7 = $data['instruction_7'] ?? null;
+    $instruction_8 = $data['instruction_8'] ?? null;
+    $instruction_9 = $data['instruction_9'] ?? null;
+    $instruction_10 = $data['instruction_10'] ?? null;
     echo "här:";
     $query1 = "INSERT INTO recipes VALUES(
     $id,
