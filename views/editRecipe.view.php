@@ -8,7 +8,7 @@
     <title>Redigera <?php echo "hej" ?></title>
 </head>
 <body>
-<a href="//localhost/receptsida">Kom hem igen!</a>
+<a href="../">Kom hem igen!</a>
 <h1>Receptsida</h1>
 <h2>Redigera <?=$recipe[0][0]["name"]?></h2>
 <?php

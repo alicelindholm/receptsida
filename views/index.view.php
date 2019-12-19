@@ -25,7 +25,7 @@ $recipes = getAllNames();
 <div class="container mt-3">
     <h1 class="display-3">Receptsida</h1>
 </div>
-<a href="newRecipe.php" class="btn btn-success">+</a> <label for=""><h2 class="h5">Nytt recept</h2></label>
+<a href="nyttRecept" class="btn btn-success">+</a> <label for=""><h2 class="h5">Nytt recept</h2></label>
 <div class=" mb-2 d-flex align-content-stretch col-12 col-md-6 col-lg-4 col-xl-3">
 
     <div class="row">
@@ -36,17 +36,17 @@ $recipes = getAllNames();
             <!-- Lägg till bootstrap-->
             <div class="card">
                 <?php if ($recipe["img"] != null) { ?>
-                    <a href="recipe.php/?id=<?= $recipe["id"] ?>"><img class="card-img-top"
+                    <a href="recept/<?= $recipe["id"] ?>"><img class="card-img-top"
                                                                        src="uploads/<?= $recipe["img"] ?>"
                                                                        alt="Card image cap"></a>
                 <?php } ?>
                 <div class="card-body">
                     <br>
-                    <a href="recipe.php/?id=<?= $recipe["id"] ?>"><h2
+                    <a href="recept/<?= $recipe["id"] ?>"><h2
                                 class="text-dark"><?= $recipe["name"]; ?></h2></a>
                 </div>
                 <div class="card-footer">
-                    <a href="editRecipe.php/?id=<?= $recipe["id"] ?>" class="btn btn-success">Redigera</a>
+                    <a href="redigeraRecept/<?= $recipe["id"] ?>" class="btn btn-success">Redigera</a>
                     <a onclick="return confirm('Är du säker på att du vill radera receptet?')"
                        href="deleteRecipe.php/?id=<?= $recipe["id"] ?>" class="btn btn-secondary"><i>Radera</i></a>
                 </div>

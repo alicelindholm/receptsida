@@ -1,6 +1,6 @@
 <?php
 require "db.php";
-$id = $_GET["id"];
+$id = $vars["id"];
 $recipe = getOneRecipe($id);
 //Ta bort id
 $arrayShift = array_shift($recipe[1][0]);
