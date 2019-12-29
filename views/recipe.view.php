@@ -11,38 +11,43 @@
 
 </head>
 <body>
-<div class="conainer">
+<div class="container">
     <h1 class="display-3"><a class="text-dark" href="../">Receptsida</a></h1>
-    <h2><?= $recipe[0][0]["name"] ?></a></h2>
-    <?php if ($recipe[0][0]["img"] != null) { ?>
-        <img src="../uploads/<?= $recipe[0][0]['img'] ?>" alt="Bild på <?= $recipe[0][0]['name'] ?>">
-    <?php } ?>
-    <h3>Ingredienser</h3>
-    <ul>
-        <?php
-        //Skriver ut ingredienser, men ej id
-        foreach ($recipe[1][0] as $ingredient) {
-            //Checkar om ingrediens har innehåll
-            if ($ingredient != "") {
+    <div class="row">
+
+        <div class="col align-self-center">
+            <h2><?= $recipe[0][0]["name"] ?></a></h2>
+            <?php if ($recipe[0][0]["img"] != null) { ?>
+                <img src="../uploads/<?= $recipe[0][0]['img'] ?>" alt="Bild på <?= $recipe[0][0]['name'] ?>">
+            <?php } ?>
+            <h3>Ingredienser</h3>
+            <ul>
+                <?php
+                //Skriver ut ingredienser, men ej id
+                foreach ($recipe[1][0] as $ingredient) {
+                    //Checkar om ingrediens har innehåll
+                    if ($ingredient != "") {
+                        ?>
+                        <li><?= $ingredient ?></li>
+                    <?php }
+                }
                 ?>
-                <li><?= $ingredient ?></li>
-            <?php }
-        }
-        ?>
-    </ul>
-    <h3>Instruktioner</h3>
-    <ol>
-        <?php
-        //Skriver ut instruktioner, men ej id
-        foreach ($recipe[2][0] as $instruction) {
-            //Checkar om instruktion har innehåll
-            if ($instruction != "" && $instruction != null) {
+            </ul>
+            <h3>Instruktioner</h3>
+            <ol>
+                <?php
+                //Skriver ut instruktioner, men ej id
+                foreach ($recipe[2][0] as $instruction) {
+                    //Checkar om instruktion har innehåll
+                    if ($instruction != "" && $instruction != null) {
+                        ?>
+                        <li><?= $instruction ?></li>
+                    <?php }
+                }
                 ?>
-                <li><?= $instruction ?></li>
-            <?php }
-        }
-        ?>
-    </ol>
+            </ol>
+        </div>
+    </div>
 </div>
 </body>
 </html>
