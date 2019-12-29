@@ -9,7 +9,14 @@
     </style>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="w
+
+          idth=device-width, user-scalable=no, initial
+
+
+
+
+          -scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Receptsida</title>
@@ -22,38 +29,41 @@
 $recipes = getAllNames();
 ?>
 
-<div class="container mt-3">
-    <h1 class="display-3">Receptsida</h1>
-</div>
-<a href="nyttRecept" class="btn btn-success">+</a> <label for=""><h2 class="h5">Nytt recept</h2></label>
-<div class=" mb-2 d-flex align-content-stretch col-12 col-md-6 col-lg-4 col-xl-3">
+<main role="main" class="container">
+    <div class="text-center"><h1 class="display-3">Receptsida</h1></div>
+    <a href="nyttRecept" class="btn btn-success">+</a> <label for=""><h2 class="h5">Nytt recept</h2></label>
+
 
     <div class="row">
+
         <?php
         foreach ($recipes
 
                  as $recipe) { ?>
             <!-- Lägg till bootstrap-->
-            <div class="card">
-                <?php if ($recipe["img"] != null) { ?>
-                    <a href="recept/<?= $recipe["id"] ?>"><img class="card-img-top"
-                                                                       src="uploads/<?= $recipe["img"] ?>"
-                                                                       alt="Card image cap"></a>
-                <?php } ?>
-                <div class="card-body">
-                    <br>
-                    <a href="recept/<?= $recipe["id"] ?>"><h2
-                                class="text-dark"><?= $recipe["name"]; ?></h2></a>
-                </div>
-                <div class="card-footer">
-                    <a href="redigeraRecept/<?= $recipe["id"] ?>" class="btn btn-success">Redigera</a>
-                    <a onclick="return confirm('Är du säker på att du vill radera receptet?')"
-                       href="deleteRecipe.php/?id=<?= $recipe["id"] ?>" class="btn btn-secondary"><i>Radera</i></a>
+            <div class=" mb-2 d-flex align-content-stretch col-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="card">
+                    <?php if ($recipe["img"] != null) { ?>
+                        <a href="recept/<?= $recipe["id"] ?>"><img class="card-img-top"
+                                                                   src="uploads/<?= $recipe["img"] ?>"
+                                                                   alt="Card image cap"></a>
+                    <?php } ?>
+                    <div class="card-body">
+                        <br>
+                        <a href="recept/<?= $recipe["id"] ?>"><h2
+                                    class="text-dark"><?= $recipe["name"]; ?></h2></a>
+                    </div>
+                    <div class="card-footer">
+                        <a href="redigeraRecept/<?= $recipe["id"] ?>" class="btn btn-success">Redigera</a>
+                        <a onclick="return confirm('Är du säker på att du vill radera receptet?')"
+                           href="deleteRecipe.php/?id=<?= $recipe["id"] ?>" class="btn btn-secondary"><i>Radera</i></a>
+                    </div>
                 </div>
             </div>
         <?php }
         ?>
+
     </div>
-</div>
+</main>
 </body>
 </html>
