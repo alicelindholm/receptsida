@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-    <a href="./">Kom hem igen!</a>
+    <h1 class="display-3"><a class="text-dark" href="../">Receptsida</a></h1>
     <h1> Nytt recept </h1>
 
     <!-- Formuläret-->

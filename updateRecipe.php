@@ -1,40 +1,20 @@
 <?php
 require "db.php";
-if (isset($_POST['submit'])) {
-    $img = $_FILES['img'];
-    $imgName = $_FILES['img']['name'];
-    $imgTmpName = $_FILES['img']['tmp_name'];
-    $imgSize = $_FILES['img']['size'];
-    $imgError = $_FILES['img']['error'];
-    $imgType = $_FILES['img']['type'];
 
-    $imgExt = explode('.', $imgName);
-    $imgActualExt = strtolower(end($imgExt));
-
-    $allowed = array('jpg', 'jpeg', 'png');
-    if ($_FILES["img"]["name"] != "") {
-        if (in_array($imgActualExt, $allowed)) {
-            if ($imgError === 0) {
-                if ($imgSize < 500000) {
-                    $fileNameNew = uniqid('', true) . "." . $imgActualExt;
-                    $fileDestination = 'uploads/' . $fileNameNew;
-                    move_uploaded_file($imgTmpName, $fileDestination);
-                } else {
-                    echo "Din fil är för stor!";
-                }
-            } else {
-                echo "There was an error uploading your file!";
-            }
-        } else {
-            echo "You cannot upload files of this type!";
-        }
-    } else {
-       $img = getOneRecipe($_GET["id"])[0][0]["img"];
-       var_dump($img);
-        $fileNameNew = $img;
+$s = uploadFile($_POST, $_FILES);
+$img = getOneRecipe($_GET["id"])[0][0]["img"];
+//Receptet sparas endast om korrekt fil angetts, alternativt om ingen fil angetts
+if ($s[0] === "true") {
+    $recipe = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+    if ($s[1] === null) {
+        updateRecipe($_GET["id"], $recipe, $img);
+        header("location: ../");
     }
-}
-$recipe = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+    else {
+        $file = "uploads/$img";
+        unlink($file);
+        updateRecipe($_GET["id"], $recipe, $s[1]);
+        header("location: ../");
+    }
 
-updateRecipe($_GET["id"],$recipe, $fileNameNew);
-header("location: ../");
+}

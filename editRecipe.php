@@ -1,10 +1,20 @@
 <?php
 require "db.php";
-echo "<p>Visar recept med id <strong>".$vars['id']."</strong></p>";
-var_dump($vars);
 $id = $vars["id"];
 $recipe = getOneRecipe($id);
-//Ta bort id
-$arrayShift = array_shift($recipe[1][0]);
-$arrayShift = array_shift($recipe[2][0]);
+
+$countIngredients = counts("ingredient", "1", $recipe);
+$countInstructions = counts("instruction", "2", $recipe);
+
+function counts($value, $number, $recipe)
+{
+    $count = 0;
+    for ($i = 1; $i < 10; $i++) {
+        if ($recipe[$number][0][$value . '_' . $i] != "") {
+            $count += 1;
+        }
+    }
+    return $count;
+}
+
 require "views/editRecipe.view.php";
