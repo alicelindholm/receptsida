@@ -11,6 +11,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('POST', '/sparaRecept', 'storeRecipe.php');
     $r->addRoute('POST', '/uppdateraRecept/{id}', 'updateRecipe.php');
     $r->addRoute('GET', '/raderaRecept/{id}', 'deleteRecipe.php');
+    $r->addRoute('GET', '/{option}', 'home.php');
     // {id} must be a number (\d+)
 });
 

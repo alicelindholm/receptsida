@@ -82,9 +82,20 @@ function getAllInstructions()
 /**
  * @return array
  */
-function getAllNames()
+function getAllNames($option)
 {
+    $allowed = [
+        "option" => ['name', 'id']
+    ];
+
     $query = "SELECT * FROM recipes WHERE 1";
+    if ($option["option"] ?? null) {
+        if ($option["option"] === "namn") {
+            $query .= " ORDER BY name";
+        } else if ($option["option"] === "nyast") {
+            $query .= " ORDER BY id DESC";
+        }
+    }
     return fetchAll($query);
 }
 

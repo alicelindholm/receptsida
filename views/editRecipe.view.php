@@ -55,7 +55,7 @@
 
                     for ($i = 1; $i < $countInstructions + 1; $i++) {
                         ?>
-                        <label for=""> Steg <?= $i ?>
+                        <label for=""> Steg <?= $i ?>:
                         <textarea name="instruction_<?= $i ?>" id="<?= $i ?>" class='form-control' rows="5"
                                   cols="50"><?= $recipe[2][0]["instruction_" . $i] ?></textarea>
                             </label><br>
