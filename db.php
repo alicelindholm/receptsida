@@ -273,45 +273,48 @@ function updateRecipe($id, $data, $img)
  * @param $files
  * @return array
  */
-function uploadFile($post, $files){
+function uploadFile($post, $files)
+{
     $test = "false";
     if (isset($post['submit'])) {
-        $img = $files['img'];
-        $imgName = $files['img']['name'];
-        $imgTmpName = $files['img']['tmp_name'];
-        $imgSize = $files['img']['size'];
-        $imgError = $files['img']['error'];
-        $imgType = $files['img']['type'];
+        if (!empty($files)) {
+            $img = $files['img'];
+            $imgName = $files['img']['name'];
+            $imgTmpName = $files['img']['tmp_name'];
+            $imgSize = $files['img']['size'];
+            $imgError = $files['img']['error'];
+            $imgType = $files['img']['type'];
 
-        $imgExt = explode('.', $imgName);
-        $imgActualExt = strtolower(end($imgExt));
+            $imgExt = explode('.', $imgName);
+            $imgActualExt = strtolower(end($imgExt));
 
-        $allowed = array('jpg', 'jpeg', 'png');
-        if ($files["img"]["name"] != "") {
-            if (in_array($imgActualExt, $allowed)) {
-                if ($imgError === 0) {
-                    if ($imgSize < 5000000) {
-                        $test = "true";
-                        $fileNameNew = uniqid('', true) . "." . $imgActualExt;
-                        $fileDestination = 'uploads/' . $fileNameNew;
-                        move_uploaded_file($imgTmpName, $fileDestination);
+            $allowed = array('jpg', 'jpeg', 'png');
+            if ($files["img"]["name"] != "") {
+                if (in_array($imgActualExt, $allowed)) {
+                    if ($imgError === 0) {
+                        if ($imgSize < 5000000) {
+                            $test = "true";
+                            $fileNameNew = uniqid('', true) . "." . $imgActualExt;
+                            $fileDestination = 'uploads/' . $fileNameNew;
+                            move_uploaded_file($imgTmpName, $fileDestination);
+                        } else {
+                            echo "Din fil är för stor!";
+                            $fileNameNew = null;
+                        }
                     } else {
-                        echo "Din fil är för stor!";
+                        echo "There was an error uploading your file!";
                         $fileNameNew = null;
                     }
                 } else {
-                    echo "There was an error uploading your file!";
+                    echo "Du kan inte ladda upp bilder i det här formatet! Kolla att din bild är en jpg, jpeg eller png";
                     $fileNameNew = null;
                 }
             } else {
-                echo "Du kan inte ladda upp bilder i det här formatet! Kolla att din bild är en jpg, jpeg eller png";
+                $test = "true";
                 $fileNameNew = null;
             }
-        } else {
-            $test = "true";
-            $fileNameNew = null;
         }
+        $result = array($test, $fileNameNew);
+        return $result;
     }
-    $result = array($test,$fileNameNew);
-    return  $result;
 }

@@ -15,10 +15,10 @@
     <h1> Nytt recept </h1>
 
     <!-- Formuläret-->
-    <form action="storeRecipe.php" method="post" enctype="multipart/form-data">
+    <form action="./sparaRecept" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Namn:
-            <input type="text" class="form-control" name="name" id="name"> <br>
+                <input type="text" class="form-control" name="name" id="name"> <br>
             </label>
             <input type="file" name="img" id="img">
             <h2>Ingredienser</h2>
@@ -46,9 +46,10 @@
             <h2>Instruktioner</h2>
             <?php
             for ($i = 0; $i < 2; $i++) { ?>
-                <label> Steg <?= $i + 1 ?>: </label> <br>
-                <textarea class="form-control" name="instruction_<?= $i + 1 ?>" id="instruction_<?= $i + 1 ?>" rows="5"></textarea>
-
+                <label> Steg <?= $i + 1 ?>: <br>
+                    <textarea class="form-control" name="instruction_<?= $i + 1 ?>" id="instruction_<?= $i + 1 ?>"
+                              rows="5" cols="50"></textarea>
+                </label>
                 <br>
             <?php }
             ?>
@@ -68,27 +69,5 @@
         </div>
     </form>
 </div>
-<script>
-    let amountIngredient = 5;
-    let amountInstruction = 2;
-
-    function addIngredient() {
-        amountIngredient += 1;
-        if (amountIngredient < 11) {
-            document.getElementById("ingredientBox" + amountIngredient).innerHTML += "<label>Ingrediens " + amountIngredient + ": <input type='text' class='form-control' name='ingredient_" + amountIngredient + "' id='ingredient_" + amountIngredient + "' ></label> <br>";
-        } else {
-            alert("Du kan inte ha mer än 10 ingredienser!")
-        }
-    }
-
-    function addInstruction() {
-        amountInstruction += 1;
-        if (amountInstruction < 11) {
-            document.getElementById("instructionBox" + amountInstruction).innerHTML += "<label>Steg " + amountInstruction + ":</label><br> <textarea type='text' class='form-control' name='instruction_" + amountInstruction + "' id='instruction_" + amountInstruction + "'  rows='5'></textarea> <br>";
-        } else {
-            alert("Du kan inte ha mer än 10 instruktioner!")
-        }
-    }
-</script>
 </body>
 </html>

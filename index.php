@@ -8,6 +8,9 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('GET', '/recept/{id}', 'recipe.php');
     $r->addRoute('GET', '/nyttRecept', 'newRecipe.php');
     $r->addRoute('GET', '/redigeraRecept/{id}', 'editRecipe.php');
+    $r->addRoute('POST', '/sparaRecept', 'storeRecipe.php');
+    $r->addRoute('POST', '/uppdateraRecept/{id}', 'updateRecipe.php');
+    $r->addRoute('GET', '/raderaRecept/{id}', 'deleteRecipe.php');
     // {id} must be a number (\d+)
 });
 

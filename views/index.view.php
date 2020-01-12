@@ -56,7 +56,7 @@ $recipes = getAllNames();
                     <div class="card-footer">
                         <a href="redigeraRecept/<?= $recipe["id"] ?>" class="btn btn-success">Redigera</a>
                         <a onclick="return confirm('Är du säker på att du vill radera receptet?')"
-                           href="deleteRecipe.php/?id=<?= $recipe["id"] ?>" class="btn btn-secondary"><i>Radera</i></a>
+                           href=raderaRecept/<?= $recipe["id"] ?>" class="btn btn-secondary"><i>Radera</i></a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <?php
 require "db.php";
-$id = $_GET;
+$id = $id = $vars["id"];
 deleteRecipe($id);
 
 header("location: ../");
