@@ -44,6 +44,7 @@ function deleteRecipe($getId)
 function fetchAll($query)
 {
     $db = connect();
+    var_dump($query);
     $stmt = $db->prepare($query);
     $stmt->execute();
     $result = $stmt->fetchAll();

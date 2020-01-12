@@ -1,5 +1,7 @@
+<script src="main.js"></script>
 <?php
 require "db.php";
+var_dump($vars);
 $id = $vars["id"];
 $recipe = getOneRecipe($id);
 
@@ -24,7 +26,7 @@ function countNotEmpty($value, $number, $recipe)
 }
 
 require "views/editRecipe.view.php"; ?>
-<script src="main.js"></script>
+
 
 <!--<script>
    // let amountIngredient = <?=$countIngredients?>;

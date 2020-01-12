@@ -17,8 +17,6 @@
 
         <div class="col align-self-center">
             <h2>Redigera <?= $recipe[0][0]["name"] ?></h2>
-            <?php
-            ?>
             <form action="../uppdateraRecept/<?= $id ?>" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <input type="text" name="name" id="name" value="<?= $recipe[0][0]['name'] ?>"> <br>
