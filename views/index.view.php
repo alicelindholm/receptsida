@@ -23,12 +23,12 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="icon" href="../icon.jpg">
 </head>
 <body>
 <main role="main" class="container">
     <div class="text-center"><h1 class="display-3">Receptsida</h1></div>
     <a href="nyttRecept" class="btn btn-success">+</a> <label for=""><h2 class="h5">Nytt recept</h2></label>
-
     <div class="row">
         <p class="h6"> Sortera efter: </p>
         <div class="mx-1"><a class="text-dark" href="/namn">Namn</a></div>
