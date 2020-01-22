@@ -162,10 +162,12 @@ function storeRecipe($data, $img)
 {
     $result = fetchAll("SELECT MAX(id) FROM recipes");
     $id = $result[0]['MAX(id)'] + 1;
+    $date = date('Y-m-d');
     $query1 = "INSERT INTO recipes VALUES(
     $id,
     :name,
-    :img)";
+    :img,
+    '$date')";
     $query2 = "INSERT INTO ingredients VALUES(
     $id,
     :ingredient_1,
