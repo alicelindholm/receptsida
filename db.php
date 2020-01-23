@@ -162,10 +162,19 @@ function storeRecipe($data, $img)
 {
     $result = fetchAll("SELECT MAX(id) FROM recipes");
     $id = $result[0]['MAX(id)'] + 1;
+<<<<<<< HEAD
     $query1 = "INSERT INTO recipes VALUES(
     $id,
     :name,
     :img)";
+=======
+    $date = date('Y-m-d');
+    $query1 = "INSERT INTO recipes VALUES(
+    $id,
+    :name,
+    :img,
+    $date)";
+>>>>>>> parent of 7913cee... commit
     $query2 = "INSERT INTO ingredients VALUES(
     $id,
     :ingredient_1,
