@@ -49,6 +49,7 @@
                         <br>
                         <a href="recept/<?= $recipe["id"] ?>"><h2
                                     class="text-dark"><?= $recipe["name"]; ?></h2></a>
+
                     </div>
                     <div class="card-footer">
                         <a href="redigeraRecept/<?= $recipe["id"] ?>" class="btn btn-success">Redigera</a>
