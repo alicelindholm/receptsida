@@ -6,7 +6,7 @@ $file = uploadFile($_POST,$_FILES);
 if($file[0] === "true") {
     $recipe = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
     storeRecipe($recipe, $file[1]);
-    //header("location: ../");
+    header("location: ../");
 }
 else{
     header("location: ../");
