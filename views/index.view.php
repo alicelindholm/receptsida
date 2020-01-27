@@ -9,14 +9,7 @@
     </style>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="w
-
-          idth=device-width, user-scalable=no, initial
-
-
-
-
-          -scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Receptsida</title>
@@ -27,7 +20,7 @@
 </head>
 <body>
 <main role="main" class="container">
-    <div class="text-center"><h1 class="display-3">Receptsida</h1></div>
+    <div class="text-center"><h1 class="display-3">Receptsida hej</h1></div>
     <a href="nyttRecept" class="btn btn-success">+</a> <label for=""><h2 class="h5">Nytt recept</h2></label>
 
     <div class="row">
