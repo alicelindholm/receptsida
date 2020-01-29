@@ -25,27 +25,25 @@
             <p> Glöm inte att fylla i mängd!</p>
 
             <?php
-            for ($i = 0; $i < 5; $i++) { ?>
+            $i = 0;
+            for ($i; $i < 5; $i++) { ?>
                 <div class="ingredientbox<?= $i + 1 ?>">
-                    <label> Ingrediens <?= $i + 1 ?>:
-                        <input type="text" class="form-control" name="ingredient_<?= $i + 1 ?>" id="<?= $i + 1 ?>">
-                    </label>
+                    <div id="ingredientBox<?= $i + 1 ?>">
+                        <label> Ingrediens <?= $i + 1 ?>:
+                            <input type="text" class="form-control" name="ingredient_<?= $i + 1 ?>" id="<?= $i + 1 ?>">
+                        </label>
+                    </div>
                 </div>
                 <br>
             <?php }
             ?>
             <!-- Extra ingredienser -->
-            <div id="ingredientBox1"></div>
-            <div id="ingredientBox2"></div>
-            <div id="ingredientBox3"></div>
-            <div id="ingredientBox4"></div>
-            <div id="ingredientBox5"></div>
             <div id="ingredientBox6"></div>
             <div id="ingredientBox7"></div>
             <div id="ingredientBox8"></div>
             <div id="ingredientBox9"></div>
             <div id="ingredientBox10"></div>
-            <input type="button" class="btn btn-secondary" onclick="removeIngredient()" value="-">
+            <input type="button" class="btn btn-secondary" onclick="removeIngredient(amountIngredient)" value="-">
             <input type="button" class="btn btn-secondary" onclick="addIngredient()" value="+"> <label for=""> Lägg till
                 ingrediens</label>
             <h2>Instruktioner</h2>
@@ -75,11 +73,6 @@
         </div>
     </form>
 </div>
-<script>
-    function removeIngredient() {
 
-    }
-
-</script>
 </body>
 </html>
