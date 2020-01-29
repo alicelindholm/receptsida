@@ -20,7 +20,7 @@
 </head>
 <body>
 <main role="main" class="container">
-    <div class="text-center"><h1 class="display-3">Receptsida hej</h1></div>
+    <div class="text-center"><h1 class="display-3">Receptsida</h1></div>
     <a href="nyttRecept" class="btn btn-success">+</a> <label for=""><h2 class="h5">Nytt recept</h2></label>
 
     <div class="row">
@@ -43,6 +43,7 @@
                         <br>
                         <a href="recept/<?= $recipe["id"] ?>"><h2
                                     class="text-dark"><?= $recipe["name"]; ?></h2></a>
+                        <p><?=$recipe["date"]?></p>
                     </div>
                     <div class="card-footer">
                         <a href="redigeraRecept/<?= $recipe["id"] ?>" class="btn btn-success">Redigera</a>

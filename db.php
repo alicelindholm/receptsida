@@ -162,14 +162,13 @@ function storeRecipe($data, $img)
 {
     $result = fetchAll("SELECT MAX(id) FROM recipes");
     $id = $result[0]['MAX(id)'] + 1;
+    $date = date("Y-m-d");
+    var_dump($date);
     $query1 = "INSERT INTO recipes VALUES(
     $id,
     :name,
-    :img)";
-    $query1 = "INSERT INTO recipes VALUES(
-    $id,
-    :name,
-    :img,)";
+    :img,
+    '$date')";
     $query2 = "INSERT INTO ingredients VALUES(
     $id,
     :ingredient_1,
@@ -211,6 +210,7 @@ function storeRecipe($data, $img)
 function updateDatabase($query1, $query2, $query3, $data, $img)
 {
     $db = connect();
+    var_dump($query1);
     $stmt1 = $db->prepare($query1);
     $stmt2 = $db->prepare($query2);
     $stmt3 = $db->prepare($query3);
