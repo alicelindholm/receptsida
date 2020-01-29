@@ -80,6 +80,7 @@ function getAllInstructions()
 
 
 /**
+ * @param $option
  * @return array
  */
 function getAllNames($option)
@@ -93,7 +94,7 @@ function getAllNames($option)
         if ($option["option"] === "namn") {
             $query .= " ORDER BY name";
         } else if ($option["option"] === "nyast") {
-            $query .= " ORDER BY id DESC";
+            $query .= " ORDER BY date DESC";
         }
     }
     return fetchAll($query);

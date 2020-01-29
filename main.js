@@ -1,10 +1,11 @@
 let amountIngredient = 5;
 let amountInstruction = 2;
-
+console.log(amountIngredient);
 function addIngredient() {
     amountIngredient += 1;
     if (amountIngredient < 11) {
         document.getElementById("ingredientBox" + amountIngredient).innerHTML += "<label>Ingrediens " + amountIngredient + ": <input type='text' class='form-control' name='ingredient_" + amountIngredient + "' id='ingredient_" + amountIngredient + "' ></label> <br>";
+   console.log("slut: "+ amountIngredient);
     } else {
         alert("Du kan inte ha mer än 10 ingredienser!")
     }
@@ -17,4 +18,15 @@ function addInstruction() {
     } else {
         alert("Du kan inte ha mer än 10 instruktioner!")
     }
+}
+function removeIngredient() {
+
+    console.log("amount"+amountIngredient);
+    let element = document.getElementById("ingredientBox" + amountIngredient);
+    element.parentNode.removeChild(element);
+    console.log(element);
+    amountIngredient = amountIngredient-1;
+    console.log("slut"+amountIngredient);
+
+
 }
