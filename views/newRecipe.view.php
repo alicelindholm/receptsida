@@ -35,12 +35,17 @@
             <?php }
             ?>
             <!-- Extra ingredienser -->
+            <div id="ingredientBox1"></div>
+            <div id="ingredientBox2"></div>
+            <div id="ingredientBox3"></div>
+            <div id="ingredientBox4"></div>
+            <div id="ingredientBox5"></div>
             <div id="ingredientBox6"></div>
             <div id="ingredientBox7"></div>
             <div id="ingredientBox8"></div>
             <div id="ingredientBox9"></div>
             <div id="ingredientBox10"></div>
-
+            <input type="button" class="btn btn-secondary" onclick="removeIngredient()" value="-">
             <input type="button" class="btn btn-secondary" onclick="addIngredient()" value="+"> <label for=""> Lägg till
                 ingrediens</label>
             <h2>Instruktioner</h2>
@@ -65,9 +70,16 @@
             <input type="button" class="btn btn-secondary" onclick="addInstruction()" value="+"> <label for="">Lägg till
                 instruktion</label>
             <br>
+
             <button type="submit" class="btn btn-success" name="submit">Lägg till recept</button>
         </div>
     </form>
 </div>
+<script>
+    function removeIngredient() {
+
+    }
+
+</script>
 </body>
 </html>
