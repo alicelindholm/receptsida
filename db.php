@@ -1,4 +1,6 @@
 <?php
+require_once "grafika-master/src/autoloader.php";
+use Grafika\Grafika;
 /**
  * @return PDO
  */
@@ -143,7 +145,12 @@ function getOneRecipe($id)
 
 }
 
-
+function resizeImg($img){
+        $editor = Grafika::createEditor();
+    $editor->open( $image, "uploads/$img" );
+    $editor->resizeFill( $image,300,200 );
+    $editor->save( $image, "uploads/$img");
+}
 /**
  * @param $query
  */
@@ -163,7 +170,6 @@ function storeRecipe($data, $img)
     $result = fetchAll("SELECT MAX(id) FROM recipes");
     $id = $result[0]['MAX(id)'] + 1;
     $date = date("Y-m-d");
-    var_dump($date);
     $query1 = "INSERT INTO recipes VALUES(
     $id,
     :name,
@@ -194,8 +200,9 @@ function storeRecipe($data, $img)
     :instruction_9,
     :instruction_10)";
 
+    resizeImg($img);
     updateDatabase($query1, $query2, $query3, $data, $img);
-
+    resizeImg($img);
 
 }
 
@@ -210,7 +217,6 @@ function storeRecipe($data, $img)
 function updateDatabase($query1, $query2, $query3, $data, $img)
 {
     $db = connect();
-    var_dump($query1);
     $stmt1 = $db->prepare($query1);
     $stmt2 = $db->prepare($query2);
     $stmt3 = $db->prepare($query3);
@@ -239,6 +245,7 @@ function updateDatabase($query1, $query2, $query3, $data, $img)
     $stmt1->execute();
     $stmt2->execute();
     $stmt3->execute();
+resizeImg($img);
 }
 
 
@@ -249,7 +256,6 @@ function updateDatabase($query1, $query2, $query3, $data, $img)
  */
 function updateRecipe($id, $data, $img)
 {
-
     $query1 = "UPDATE recipes SET 
                    name=:name,
                    img = :img

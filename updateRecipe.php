@@ -2,7 +2,6 @@
 require "db.php";
 $id = $vars["id"];
 var_dump($id);
-var_dump($_POST);
 $s = uploadFile($_POST, $_FILES);
 $img = getOneRecipe($id)[0][0]["img"];
 //Receptet sparas endast om korrekt fil angetts, alternativt om ingen fil angetts
@@ -15,7 +14,7 @@ if ($s[0] === "true") {
     else {
         $file = "uploads/$img";
         unlink($file);
-        updateRecipe($_GET["id"], $recipe, $s[1]);
+        updateRecipe($id, $recipe, $s[1]);
         header("location: ../");
     }
 

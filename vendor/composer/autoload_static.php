@@ -15,6 +15,10 @@ class ComposerStaticInit80d92d3d62bd80bd1caf1f6aa2563a1c
         array (
             'Klein\\' => 6,
         ),
+        'G' => 
+        array (
+            'Grafika\\' => 8,
+        ),
         'F' => 
         array (
             'FastRoute\\' => 10,
@@ -25,6 +29,10 @@ class ComposerStaticInit80d92d3d62bd80bd1caf1f6aa2563a1c
         'Klein\\' => 
         array (
             0 => __DIR__ . '/..' . '/klein/klein/src/Klein',
+        ),
+        'Grafika\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kosinix/grafika/src/Grafika',
         ),
         'FastRoute\\' => 
         array (
