@@ -1,6 +1,8 @@
 <?php
 require_once "grafika-master/src/autoloader.php";
+
 use Grafika\Grafika;
+
 /**
  * @return PDO
  */
@@ -82,20 +84,24 @@ function getAllInstructions()
 
 
 /**
+ * @param $option
  * @return array
  */
 function getAllNames($option)
 {
-    $allowed = [
-        "option" => ['name', 'id']
-    ];
+    $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS);
 
-    $query = "SELECT * FROM recipes WHERE 1";
+    if (isset($get["search"])) {
+        $search = $get["search"];
+    }
+    $query = "SELECT * FROM recipes";
     if ($option["option"] ?? null) {
         if ($option["option"] === "namn") {
             $query .= " ORDER BY name";
         } else if ($option["option"] === "nyast") {
             $query .= " ORDER BY id DESC";
+        } else if ($option["option"] === "sökning") {
+                $query .= " WHERE name LIKE '%$search%'";
         }
     }
     return fetchAll($query);
@@ -145,12 +151,20 @@ function getOneRecipe($id)
 
 }
 
-function resizeImg($img){
+/**
+ * @param $img
+ * @throws Exception
+ */
+function resizeImg($img)
+{
+    if ($img ?? null) {
         $editor = Grafika::createEditor();
-    $editor->open( $image, "uploads/$img" );
-    $editor->resizeFill( $image,300,200 );
-    $editor->save( $image, "uploads/$img");
+        $editor->open($image, "uploads/$img");
+        $editor->resizeFill($image, 300, 200);
+        $editor->save($image, "uploads/$img");
+    }
 }
+
 /**
  * @param $query
  */
@@ -245,7 +259,7 @@ function updateDatabase($query1, $query2, $query3, $data, $img)
     $stmt1->execute();
     $stmt2->execute();
     $stmt3->execute();
-resizeImg($img);
+    resizeImg($img);
 }
 
 

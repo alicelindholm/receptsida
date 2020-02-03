@@ -12,6 +12,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('POST', '/uppdateraRecept/{id}', 'updateRecipe.php');
     $r->addRoute('GET', '/raderaRecept/{id}', 'deleteRecipe.php');
     $r->addRoute('GET', '/{option}', 'home.php');
+    $r->addRoute('POST', '/sökRecept', 'searchRecipe.php');
     // {id} must be a number (\d+)
 });
 

@@ -20,7 +20,16 @@
 </head>
 <body>
 <main role="main" class="container">
-    <div class="text-center"><h1 class="display-3">Receptsida</h1></div>
+    <div class="col">
+        <div class="text-center"><h1 class="display-3"><a class="text-dark" href="../">Receptsida</a></h1></div>
+        <form action="/sökning" method="get">
+            <div class="text-center">
+                <label for="search">
+                    <input type="text" name="search" id="search" placeholder="Search.."> <br>
+                </label>
+            </div>
+        </form>
+    </div>
     <a href="nyttRecept" class="btn btn-success">+</a> <label for=""><h2 class="h5">Nytt recept</h2></label>
 
     <div class="row">
@@ -29,6 +38,12 @@
         <div class="mx-1"><a class="text-dark" href="/nyast">Nyast</a></div>
         <div class="mx-1"><a class="text-dark" href="/äldst">Äldst</a></div>
     </div>
+
+    <?php
+    if (empty($recipes)) {
+        echo "<p>Du sökte på: '" . $search . "'</p><p> Din sökning gav tyvärr inga resultat. :( </p>";
+    }
+    ?>
     <div class="row">
         <?php
         foreach ($recipes as $recipe) { ?>
@@ -43,7 +58,7 @@
                         <br>
                         <a href="recept/<?= $recipe["id"] ?>"><h2
                                     class="text-dark"><?= $recipe["name"]; ?></h2></a>
-                        <p><?=$recipe["date"]?></p>
+                        <p><?= $recipe["date"] ?></p>
                     </div>
                     <div class="card-footer">
                         <a href="redigeraRecept/<?= $recipe["id"] ?>" class="btn btn-success">Redigera</a>
