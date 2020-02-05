@@ -1,5 +1,8 @@
 <?php
 require "db.php";
+if($vars == null){
+    $vars = "";
+}
 $option = $vars;
 $recipes = getAllNames($option);
 $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS);

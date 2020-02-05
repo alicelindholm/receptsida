@@ -48,6 +48,7 @@ function deleteRecipe($getId)
 function fetchAll($query)
 {
     $db = connect();
+    var_dump($query);
     $stmt = $db->prepare($query);
     $stmt->execute();
     $result = $stmt->fetchAll();
@@ -101,8 +102,14 @@ function getAllNames($option)
         } else if ($option["option"] === "nyast") {
             $query .= " ORDER BY id DESC";
         } else if ($option["option"] === "sökning") {
-                $query .= " WHERE name LIKE '%$search%'";
+            $query .= " WHERE name LIKE '%$search%'";
+            for ($i = 1; $i < 10; $i++) {
+                $query2 = "SELECT * FROM ingredients WHERE ingredient_" . $i . " LIKE '%$search%'";
+            }
+
         }
+
+
     }
     return fetchAll($query);
 }

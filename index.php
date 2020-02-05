@@ -5,6 +5,7 @@ require "vendor/autoload.php";
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/', 'home.php');
+    $r->addRoute('GET', '//', 'home.php');
     $r->addRoute('GET', '/recept/{id}', 'recipe.php');
     $r->addRoute('GET', '/nyttRecept', 'newRecipe.php');
     $r->addRoute('GET', '/redigeraRecept/{id}', 'editRecipe.php');
