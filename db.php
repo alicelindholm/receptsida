@@ -88,8 +88,9 @@ function getAllInstructions()
  * @param $option
  * @return array
  */
-function getAllNames($option)
+function getAllRecipes($option)
 {
+    $result = array();
     $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS);
 
     if (isset($get["search"])) {
@@ -104,14 +105,19 @@ function getAllNames($option)
         } else if ($option["option"] === "sökning") {
             $query .= " WHERE name LIKE '%$search%'";
             for ($i = 1; $i < 10; $i++) {
-                $query2 = "SELECT * FROM ingredients WHERE ingredient_" . $i . " LIKE '%$search%'";
-            }
+                $id = fetchAll("SELECT id FROM ingredients WHERE ingredient_" . $i . " LIKE '%$search%'");
 
+                if (!empty($id)) {
+                    $name = getOneName($id[0]["id"]);
+                    array_push($result, $name);
+                }
+            }
         }
 
 
     }
-    return fetchAll($query);
+    var_dump(fetchAll($query));
+    return ;
 }
 
 
