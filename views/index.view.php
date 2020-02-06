@@ -46,28 +46,30 @@
     ?>
     <div class="row">
         <?php
-        foreach ($recipes as $recipe) { ?>
-            <div class=" mb-2 d-flex align-content-stretch col-12 col-md-6 col-lg-4 col-xl-3">
-                <div class="card">
-                    <?php if ($recipe["img"] != null) { ?>
-                        <a href="recept/<?= $recipe["id"] ?>"><img class="card-img-top"
-                                                                   src="uploads/<?= $recipe["img"] ?>"
-                                                                   alt="Card image cap"></a>
-                    <?php } ?>
-                    <div class="card-body">
-                        <br>
-                        <a href="recept/<?= $recipe["id"] ?>"><h2
+        foreach ($recipes as $recipe) {
+                ?>
+                <div class=" mb-2 d-flex align-content-stretch col-12 col-md-6 col-lg-4 col-xl-3">
+                    <div class="card">
+                        <?php if($recipe["img"] != null) { ?>
+                            <a href="recept/<?= $recipe["id"] ?>"><img class="card-img-top"
+                                                                       src="uploads/<?= $recipe["img"] ?>"
+                                                                       alt="Card image cap"></a>
+                        <?php } ?>
+                        <div class="card-body">
+                            <br>
+                            <a href="recept/<?= $recipe["id"] ?>"><h2
                                     class="text-dark"><?= $recipe["name"]; ?></h2></a>
-                        <p><?= $recipe["date"] ?></p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="redigeraRecept/<?= $recipe["id"] ?>" class="btn btn-success">Redigera</a>
-                        <a onclick="return confirm('Är du säker på att du vill radera receptet?')"
-                           href=raderaRecept/<?= $recipe["id"] ?>" class="btn btn-secondary"><i>Radera</i></a>
+                            <p><?= $recipe["date"] ?></p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="redigeraRecept/<?= $recipe["id"] ?>" class="btn btn-success">Redigera</a>
+                            <a onclick="return confirm('Är du säker på att du vill radera receptet?')"
+                               href="raderaRecept/<?= $recipe["id"] ?>" class="btn btn-secondary"><i>Radera</i></a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php }
+            <?php
+        }
         ?>
 
     </div>

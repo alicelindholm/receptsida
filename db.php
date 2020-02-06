@@ -26,8 +26,8 @@ function connect()
  */
 function deleteRecipe($getId)
 {
-
-    $id = $getId["id"];
+    var_dump($getId);
+    $id = $getId;
     $img = getOneRecipe($id)[0][0]["img"];
     $file = "uploads/$img";
     $query1 = "DELETE FROM recipes WHERE id = '$id'";
@@ -48,7 +48,6 @@ function deleteRecipe($getId)
 function fetchAll($query)
 {
     $db = connect();
-    var_dump($query);
     $stmt = $db->prepare($query);
     $stmt->execute();
     $result = $stmt->fetchAll();
@@ -90,7 +89,9 @@ function getAllInstructions()
  */
 function getAllRecipes($option)
 {
+    $ids = array();
     $result = array();
+    $oneDimensionalArray = array();
     $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS);
 
     if (isset($get["search"])) {
@@ -106,18 +107,41 @@ function getAllRecipes($option)
             $query .= " WHERE name LIKE '%$search%'";
             for ($i = 1; $i < 10; $i++) {
                 $id = fetchAll("SELECT id FROM ingredients WHERE ingredient_" . $i . " LIKE '%$search%'");
-
                 if (!empty($id)) {
-                    $name = getOneName($id[0]["id"]);
-                    array_push($result, $name);
+                    array_push($ids, $id);
+                }
+
+            }
+            if (!empty($ids)) {
+                foreach ($ids as $key=>$value) {
+                    $name = getOneName($value[0]["id"]);
+                    array_push($oneDimensionalArray, $name);
                 }
             }
+
         }
-
-
     }
-    var_dump(fetchAll($query));
-    return ;
+    else{
+        $query .= " ORDER BY id DESC";
+    }
+    if (!empty($oneDimensionalArray)) {
+        $result = call_user_func_array('array_merge', $oneDimensionalArray);
+    } else {
+        $result = array();
+    }
+    $fetch = fetchAll($query);
+    if (!empty($fetch)) {
+        if (!empty($result)) {
+            foreach ($fetch as $value) {
+                array_unshift($result, $value);
+            }
+        } else {
+            foreach ($fetch as $value) {
+                array_push($result, $value);
+            }
+        }
+    }
+    return $result;
 }
 
 
@@ -184,6 +208,7 @@ function resizeImg($img)
 function runQuery($query)
 {
     $db = connect();
+    var_dump($query);
     $stmt = $db->prepare($query);
     $stmt->execute();
 }
