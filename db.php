@@ -113,15 +113,14 @@ function getAllRecipes($option)
 
             }
             if (!empty($ids)) {
-                foreach ($ids as $key=>$value) {
+                foreach ($ids as $key => $value) {
                     $name = getOneName($value[0]["id"]);
                     array_push($oneDimensionalArray, $name);
                 }
             }
 
         }
-    }
-    else{
+    } else {
         $query .= " ORDER BY id DESC";
     }
     if (!empty($oneDimensionalArray)) {
@@ -216,9 +215,13 @@ function runQuery($query)
 /**
  * @param $data
  * @param $img
+ * @throws Exception
  */
 function storeRecipe($data, $img)
 {
+    $names = array();
+    $ingredients = array();
+    $instructions = array();
     $result = fetchAll("SELECT MAX(id) FROM recipes");
     $id = $result[0]['MAX(id)'] + 1;
     $date = date("Y-m-d");
@@ -251,9 +254,23 @@ function storeRecipe($data, $img)
     :instruction_8,
     :instruction_9,
     :instruction_10)";
+    foreach ($data as $key => $value) {
+
+        $nameExist = strpos($key, "name");
+        $ingredientExist = strpos($key, "ingredient");
+        $instructionExist = strpos($key, "instruction");
+
+        if ($nameExist === 0) {
+            array_push($names, [$key => $value]);
+        } else if ($ingredientExist === 0) {
+            array_push($ingredients, [$key => $value]);
+        } else if ($instructionExist === 0) {
+            array_push($instructions, [$key => $value]);
+        }
+    }
 
     resizeImg($img);
-    updateDatabase($query1, $query2, $query3, $data, $img);
+    updateDatabase($query1, $query2, $query3, $names, $ingredients, $instructions, $img);
     resizeImg($img);
 
 }
@@ -263,37 +280,30 @@ function storeRecipe($data, $img)
  * @param $query1
  * @param $query2
  * @param $query3
- * @param $data
+ * @param $names
+ * @param $ingredient
+ * @param $instructions
  * @param $img
+ * @throws Exception
  */
-function updateDatabase($query1, $query2, $query3, $data, $img)
+function updateDatabase($query1, $query2, $query3, $names, $inputIngredients, $inputInstructions, $img)
 {
     $db = connect();
     $stmt1 = $db->prepare($query1);
     $stmt2 = $db->prepare($query2);
     $stmt3 = $db->prepare($query3);
-    $stmt1->bindParam(":name", $data["name"]);
+    $ingredients = call_user_func_array('array_merge', $inputIngredients);
+    $instructions = call_user_func_array('array_merge', $inputInstructions);
+    $stmt1->bindParam(":name", $names[0]["name"]);
     $stmt1->bindParam(":img", $img);
-    $stmt2->bindParam(":ingredient_1", $data["ingredient_1"]);
-    $stmt2->bindParam(":ingredient_2", $data["ingredient_2"]);
-    $stmt2->bindParam(":ingredient_3", $data["ingredient_3"]);
-    $stmt2->bindParam(":ingredient_4", $data["ingredient_4"]);
-    $stmt2->bindParam(":ingredient_5", $data["ingredient_5"]);
-    $stmt2->bindParam(":ingredient_6", $data["ingredient_6"]);
-    $stmt2->bindParam(":ingredient_7", $data["ingredient_7"]);
-    $stmt2->bindParam(":ingredient_8", $data["ingredient_8"]);
-    $stmt2->bindParam(":ingredient_9", $data["ingredient_9"]);
-    $stmt2->bindParam(":ingredient_10", $data["ingredient_10"]);
-    $stmt3->bindParam(":instruction_1", $data["instruction_1"]);
-    $stmt3->bindParam(":instruction_2", $data["instruction_2"]);
-    $stmt3->bindParam(":instruction_3", $data["instruction_3"]);
-    $stmt3->bindParam(":instruction_4", $data["instruction_4"]);
-    $stmt3->bindParam(":instruction_5", $data["instruction_5"]);
-    $stmt3->bindParam(":instruction_6", $data["instruction_6"]);
-    $stmt3->bindParam(":instruction_7", $data["instruction_7"]);
-    $stmt3->bindParam(":instruction_8", $data["instruction_8"]);
-    $stmt3->bindParam(":instruction_9", $data["instruction_9"]);
-    $stmt3->bindParam(":instruction_10", $data["instruction_10"]);
+    foreach ($ingredients as $key => $value) {
+        $stmt2->bindParam($key, $value);
+
+    }
+    foreach ($instructions as $key => $value) {
+        $stmt3->bindParam($key, $value);
+
+    }
     $stmt1->execute();
     $stmt2->execute();
     $stmt3->execute();
@@ -305,6 +315,7 @@ function updateDatabase($query1, $query2, $query3, $data, $img)
  * @param $id
  * @param $data
  * @param $img
+ * @throws Exception
  */
 function updateRecipe($id, $data, $img)
 {
