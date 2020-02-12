@@ -42,15 +42,18 @@ function deleteRecipe($getId)
 
 /**
  * @param $query
+ * @param $search
  * @return array
  */
-function fetchAll($query)
+function fetchAll($query, $search)
 {
     $db = connect();
     $stmt = $db->prepare($query);
+    if(!empty($search)){
+        $stmt->bindValue(":search", "%".$search."%");
+    }
     $stmt->execute();
-    $result = $stmt->fetchAll();
-    return $result;
+    return $stmt->fetchAll();
 }
 
 /**
@@ -59,14 +62,16 @@ function fetchAll($query)
  */
 function getAllRecipes($option)
 {
+    $search = null;
     $ids = array();
     $result = array();
     $oneDimensionalArray = array();
     $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS);
 
     if (isset($get["search"])) {
-        $search = $get["search"];
+        $search =$get["search"];
     }
+
     $query = "SELECT * FROM recipes";
     if ($option["option"] ?? null) {
         if ($option["option"] === "namn") {
@@ -74,9 +79,10 @@ function getAllRecipes($option)
         } else if ($option["option"] === "nyast") {
             $query .= " ORDER BY id DESC";
         } else if ($option["option"] === "sökning") {
-            $query .= " WHERE name LIKE '%$search%'";
+            $query .= " WHERE name LIKE :search";
+
             for ($i = 1; $i < 10; $i++) {
-                $id = fetchAll("SELECT id FROM ingredients WHERE ingredient_" . $i . " LIKE '%$search%'");
+                $id = fetchAll("SELECT id FROM ingredients WHERE ingredient_" . $i . " LIKE :search ", $search);
                 if (!empty($id)) {
                     array_push($ids, $id);
                 }
@@ -98,7 +104,7 @@ function getAllRecipes($option)
     } else {
         $result = array();
     }
-    $fetch = fetchAll($query);
+    $fetch = fetchAll($query, $search);
     if (!empty($fetch)) {
         if (!empty($result)) {
             foreach ($fetch as $value) {
@@ -121,7 +127,7 @@ function getAllRecipes($option)
 function getOneIngredients($id)
 {
     $query = "SELECT * FROM ingredients WHERE id = $id";
-    return fetchAll($query);
+    return fetchAll($query, null);
 }
 
 
@@ -132,7 +138,7 @@ function getOneIngredients($id)
 function getOneInstructions($id)
 {
     $query = "SELECT * FROM instructions WHERE id = $id";
-    return fetchAll($query);
+    return fetchAll($query, null);
 }
 
 
@@ -143,7 +149,7 @@ function getOneInstructions($id)
 function getOneName($id)
 {
     $query = "SELECT * FROM recipes WHERE id = $id";
-    return fetchAll($query);
+    return fetchAll($query,null);
 }
 
 /**
@@ -191,7 +197,7 @@ function storeRecipe($data, $img)
     $names = array();
     $ingredients = array();
     $instructions = array();
-    $result = fetchAll("SELECT MAX(id) FROM recipes");
+    $result = fetchAll("SELECT MAX(id) FROM recipes",null);
     $id = $result[0]['MAX(id)'] + 1;
     $date = date("Y-m-d");
     $query1 = "INSERT INTO recipes VALUES(
