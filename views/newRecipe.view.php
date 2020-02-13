@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Nytt recept</title>
+    <title>Nytt recept - Receptsida</title>
     <link rel="icon" href="icon.jpg">
 </head>
 <body>
@@ -20,7 +20,18 @@
             <label for="name">Namn:
                 <input type="text" class="form-control" name="name" id="name"> <br>
             </label>
-            <input type="file" name="img" id="img">
+            <br> <input type="file" name="img" id="img">
+            <br><label for="portions"><b>Portioner: </b><input type="number" class="form-control" name="portions" id="portions"></label>
+            <br><label for="category"> Kategori:
+                <select name="category" id="category">
+                    <option value="Maträtter">Maträtter</option>
+                    <option value="Maträtter">Efterrätter</option>
+                    <option value="Maträtter">Bakverk</option>
+                    <option value="Maträtter">Drycker</option>
+                </select>
+
+            </label>
+
             <h2>Ingredienser</h2>
             <p> Glöm inte att fylla i mängd!</p>
 

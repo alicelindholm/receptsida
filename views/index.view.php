@@ -37,11 +37,18 @@
         <div class="mx-1"><a class="text-dark" href="/namn">Namn</a></div>
         <div class="mx-1"><a class="text-dark" href="/nyast">Nyast</a></div>
         <div class="mx-1"><a class="text-dark" href="/äldst">Äldst</a></div>
+        <div class="mx-1"><a class="text-dark" href="/maträtter">Maträtter</a></div>
+        <div class="mx-1"><a class="text-dark" href="/efterrätter">Efterrätter</a></div>
+        <div class="mx-1"><a class="text-dark" href="/bakverk">Bakverk</a></div>
+        <div class="mx-1"><a class="text-dark" href="/drycker">Drycker</a></div>
     </div>
 
     <?php
     if (empty($recipes)) {
-        echo "<p>Du sökte på: '" . $search . "'</p><p> Din sökning gav tyvärr inga resultat. :( </p>";
+        if ($option["option"] === "sökning") {
+            echo "<p>Du sökte på: '" . $search . "'</p><p> Din sökning gav tyvärr inga resultat. :( </p>";
+        }
+            echo "<p>Den här kategorin är tyvärr tom. Tryck på plusset för att lägga till ett nytt!</p>";
     }
     ?>
     <div class="row">
@@ -59,6 +66,7 @@
                             <br>
                             <a href="recept/<?= $recipe["id"] ?>"><h2
                                     class="text-dark"><?= $recipe["name"]; ?></h2></a>
+                            <p><?= $recipe["category"] ?></p>
                             <p><?= $recipe["date"] ?></p>
                         </div>
                         <div class="card-footer">

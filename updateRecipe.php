@@ -1,7 +1,6 @@
 <?php
 require "db.php";
 $id = $vars["id"];
-var_dump($id);
 $s = uploadFile($_POST, $_FILES);
 $img = getOneRecipe($id)[0][0]["img"];
 //Receptet sparas endast om korrekt fil angetts, alternativt om ingen fil angetts

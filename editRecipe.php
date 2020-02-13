@@ -1,8 +1,17 @@
 <?php
 require "db.php";
+$allowedCategories = ["Maträtter", "Efterrätter", "Bakverk", "Drycker"];
+$number = 0;
 $id = $vars["id"];
 $recipe = getOneRecipe($id);
-
+var_dump($recipe[0][0]);
+//Radera valda kategorin.
+foreach ($allowedCategories as $value) {
+    if ($value === $recipe[0][0]["category"]) {
+        unset($allowedCategories[$number]);
+    }
+    $number++;
+}
 $countIngredients = countNotEmpty("ingredient", "1", $recipe);
 $countInstructions = countNotEmpty("instruction", "2", $recipe);
 
@@ -23,8 +32,9 @@ function countNotEmpty($value, $number, $recipe)
     return $count;
 }
 
-require "views/editRecipe.view.php"; ?>
+require "views/editRecipe.view.php";
 
+?>
 <script>
     let amountIngredient = <?=$countIngredients?>;
     let amountInstruction = <?=$countInstructions?>;
