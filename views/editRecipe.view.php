@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Redigera</title>
+    <title>Redigera <?= $recipe[0][0]["name"] ?> - Receptsida</title>
     <link rel="icon" href="../icon.jpg">
 </head>
 <body>
@@ -24,7 +24,22 @@
                     <input type="text" name="name" id="name" value="<?= $recipe[0][0]['name'] ?>"> <br>
                     <?php if ($recipe[0][0]["img"] != null) { ?>
                         <div class="my-3"><img src="../uploads/<?= $recipe[0][0]['img'] ?>" alt="Card image cap"></div>
-                    <?php } ?>
+                    <?php }
+                    ?>
+                    <br> <label for="portions"><b>Portioner: </b><input type="number" name="portions" id="portions" value="<?=$recipe[0][0]['portions']?>"></label>
+                    <br><label for="category"> Kategori:
+                        <select name="category" id="category">
+                            <option value="<?=$recipe[0][0]['category']?>" selected> <?=$recipe[0][0]['category']?></option>
+                    <?php
+                    foreach($allowedCategories as $value){ ?>
+                        <option value="<?=$value?>"><?=$value?></option>
+
+                   <?php  }
+                    ?>
+                        </select>
+
+                    </label>
+
                     <br> <input type="file" name="img" id="img" value="<?= $recipe[0][0]['img'] ?>"> <br>
                     <?php
                     for ($i = 1; $i < $countIngredients + 1; $i++) {

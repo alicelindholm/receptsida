@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title><?=$recipe[0][0]["name"]?> - Receptsida</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="icon" href="../icon.jpg">
@@ -20,7 +20,9 @@
             <?php if ($recipe[0][0]["img"] != null) { ?>
                 <img src="../uploads/<?= $recipe[0][0]['img'] ?>" alt="Bild på <?= $recipe[0][0]['name'] ?>">
             <?php } ?>
+
             <h3>Ingredienser</h3>
+            <b>Portioner: <?=$recipe[0][0]["portions"]?> </b>
             <ul>
                 <?php
                 //Skriver ut ingredienser, men ej id

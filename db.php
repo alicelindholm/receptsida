@@ -49,8 +49,8 @@ function fetchAll($query, $search)
 {
     $db = connect();
     $stmt = $db->prepare($query);
-    if(!empty($search)){
-        $stmt->bindValue(":search", "%".$search."%");
+    if (!empty($search)) {
+        $stmt->bindValue(":search", "%" . $search . "%");
     }
     $stmt->execute();
     return $stmt->fetchAll();
@@ -69,7 +69,7 @@ function getAllRecipes($option)
     $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS);
 
     if (isset($get["search"])) {
-        $search =$get["search"];
+        $search = $get["search"];
     }
 
     $query = "SELECT * FROM recipes";
@@ -78,7 +78,20 @@ function getAllRecipes($option)
             $query .= " ORDER BY name";
         } else if ($option["option"] === "nyast") {
             $query .= " ORDER BY id DESC";
-        } else if ($option["option"] === "sökning") {
+        }
+        else if ($option["option"] === "maträtter") {
+            $query .= " WHERE category = 'Maträtter'";
+        }
+        else if ($option["option"] === "efterrätter") {
+            $query .= " WHERE category = 'Efterrätter'";
+        }
+        else if ($option["option"] === "bakverk") {
+            $query .= " WHERE category = 'Bakverk'";
+        }
+        else if ($option["option"] === "drycker") {
+            $query .= " WHERE category = 'Drycker'";
+        }
+        else if ($option["option"] === "sökning") {
             $query .= " WHERE name LIKE :search";
 
             for ($i = 1; $i < 10; $i++) {
@@ -149,7 +162,7 @@ function getOneInstructions($id)
 function getOneName($id)
 {
     $query = "SELECT * FROM recipes WHERE id = $id";
-    return fetchAll($query,null);
+    return fetchAll($query, null);
 }
 
 /**
@@ -194,17 +207,20 @@ function runQuery($query)
  */
 function storeRecipe($data, $img)
 {
+    var_dump($data);
     $names = array();
     $ingredients = array();
     $instructions = array();
-    $result = fetchAll("SELECT MAX(id) FROM recipes",null);
+    $result = fetchAll("SELECT MAX(id) FROM recipes", null);
     $id = $result[0]['MAX(id)'] + 1;
     $date = date("Y-m-d");
     $query1 = "INSERT INTO recipes VALUES(
     $id,
     :name,
     :img,
-    '$date')";
+    '$date',
+    :portions,
+    :category)";
     $query2 = "INSERT INTO ingredients VALUES(
     $id,
     :ingredient_1,
@@ -231,12 +247,18 @@ function storeRecipe($data, $img)
     :instruction_10)";
     foreach ($data as $key => $value) {
 
+        $portionsExist = strpos($key, "portions");
         $nameExist = strpos($key, "name");
+        $categoryExist = strpos($key, "category");
         $ingredientExist = strpos($key, "ingredient");
         $instructionExist = strpos($key, "instruction");
 
         if ($nameExist === 0) {
             array_push($names, [$key => $value]);
+        } else if ($portionsExist === 0) {
+            array_push($names, [$key => $value]);
+        } else if ($categoryExist === 0) {
+                array_push($names, [$key => $value]);
         } else if ($ingredientExist === 0) {
             array_push($ingredients, [$key => $value]);
         } else if ($instructionExist === 0) {
@@ -262,6 +284,7 @@ function storeRecipe($data, $img)
  */
 function updateDatabase($query1, $query2, $query3, $names, $inputIngredients, $inputInstructions, $img)
 {
+    var_dump($names);
     $db = connect();
     $stmt1 = $db->prepare($query1);
     $stmt2 = $db->prepare($query2);
@@ -273,6 +296,8 @@ function updateDatabase($query1, $query2, $query3, $names, $inputIngredients, $i
         $instructions = call_user_func_array('array_merge', $inputInstructions);
     }
     $stmt1->bindParam(":name", $names[0]["name"]);
+    $stmt1->bindParam(":portions", $names[1]["portions"]);
+    $stmt1->bindParam(":category", $names[2]["category"]);
     $stmt1->bindParam(":img", $img);
     if (!empty($ingredients)) {
         foreach ($ingredients as $key => $value) {
@@ -301,12 +326,15 @@ function updateDatabase($query1, $query2, $query3, $names, $inputIngredients, $i
  */
 function updateRecipe($id, $data, $img)
 {
+    var_dump($data);
     $names = array();
     $ingredients = array();
     $instructions = array();
     $query1 = "UPDATE recipes SET 
                    name=:name,
-                   img = :img
+                   img = :img,
+                   portions = :portions,
+                   category = :category
             WHERE id = $id";
     $query2 = "UPDATE ingredients SET
                        ingredient_1 = :ingredient_1,
@@ -332,14 +360,23 @@ function updateRecipe($id, $data, $img)
     instruction_9= :instruction_9,
     instruction_10 = :instruction_10
                        WHERE id = $id";
+    //delar upp $data i olika arrayer beroende på vilken tabell den tillhör
     foreach ($data as $key => $value) {
 
+        $portionsExist = strpos($key, "portions");
         $nameExist = strpos($key, "name");
+        $categoryExist = strpos($key, "category");
         $ingredientExist = strpos($key, "ingredient");
         $instructionExist = strpos($key, "instruction");
-
         if ($nameExist === 0) {
             array_push($names, [$key => $value]);
+            echo "1";
+        } else if ($portionsExist === 0) {
+            array_push($names, [$key => $value]);
+            echo "2";
+        } else if ($categoryExist === 0) {
+            array_push($names, [$key => $value]);
+            echo "3";
         } else if ($ingredientExist === 0) {
             array_push($ingredients, [$key => $value]);
         } else if ($instructionExist === 0) {
