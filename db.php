@@ -222,7 +222,7 @@ function storeRecipe($data, $img)
     :portions,
     :category)";
     $query2 = "INSERT INTO ingredients VALUES(
-    $id,
+    $id,   
     :ingredient_1,
     :ingredient_2,
     :ingredient_3,

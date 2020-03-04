@@ -6,14 +6,18 @@ require "vendor/autoload.php";
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/', 'home.php');
     $r->addRoute('GET', '//', 'home.php');
+    $r->addRoute('GET', '/login', 'login.php');
+    $r->addRoute('POST', '/login.inc', 'includes/login.inc.php');
+    $r->addRoute('GET', '/signup', 'signup.php');
+    $r->addRoute('GET', '/signup.inc', 'includes/signup.inc.php');
     $r->addRoute('GET', '/recept/{id}', 'recipe.php');
     $r->addRoute('GET', '/nyttRecept', 'newRecipe.php');
     $r->addRoute('GET', '/redigeraRecept/{id}', 'editRecipe.php');
-    $r->addRoute('POST', '/sparaRecept', 'storeRecipe.php');
-    $r->addRoute('POST', '/uppdateraRecept/{id}', 'updateRecipe.php');
-    $r->addRoute('GET', '/raderaRecept/{id}', 'deleteRecipe.php');
+    $r->addRoute('POST', '/sparaRecept', 'includes/storeRecipe.php');
+    $r->addRoute('POST', '/uppdateraRecept/{id}', 'includes/updateRecipe.php');
+    $r->addRoute('GET', '/raderaRecept/{id}', 'includes/deleteRecipe.php');
     $r->addRoute('GET', '/{option}', 'home.php');
-    $r->addRoute('POST', '/sökRecept', 'searchRecipe.php');
+    $r->addRoute('POST', '/sökRecept', 'includes/searchRecipe.php');
     // {id} must be a number (\d+)
 });
 
