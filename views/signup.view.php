@@ -8,6 +8,9 @@
     <title>Skapa konto</title>
 </head>
 <body>
+<?php
+var_dump($_GET);
+?>
 <main>
     <h1>Skapa konto</h1>
     <form action="/signup.inc" method="post">
@@ -15,7 +18,7 @@
         <input type="text" name="email" placeholder="E-postaddress">
         <input type="password" name="pwd" placeholder="Lösenord">
         <input type="password" name="pwd-repeat" placeholder="Bekräfta lösenord">
-        <button type="submit" name="signup-submit">Skapa konto</button>
+        <input type="submit" name="signup-submit" value="Skapa konto">
     </form>
 </main>
 </body>

@@ -9,7 +9,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('GET', '/login', 'login.php');
     $r->addRoute('POST', '/login.inc', 'includes/login.inc.php');
     $r->addRoute('GET', '/signup', 'signup.php');
-    $r->addRoute('GET', '/signup.inc', 'includes/signup.inc.php');
+    $r->addRoute('POST', '/signup.inc', 'includes/signup.inc.php');
     $r->addRoute('GET', '/recept/{id}', 'recipe.php');
     $r->addRoute('GET', '/nyttRecept', 'newRecipe.php');
     $r->addRoute('GET', '/redigeraRecept/{id}', 'editRecipe.php');

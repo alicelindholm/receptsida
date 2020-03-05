@@ -3,6 +3,12 @@ require_once "grafika-master/src/autoloader.php";
 
 use Grafika\Grafika;
 
+function checkUsername($username)
+{
+    $query = "select username from users where username = :username";
+    return fetch($query, $username);
+}
+
 /**
  * @return PDO
  */
@@ -39,6 +45,17 @@ function deleteRecipe($getId)
     runQuery($query3);
 }
 
+
+function fetch($query, $username)
+{
+    $db = connect();
+    $stmt = $db->prepare($query);
+    if (!empty($search)) {
+        $stmt->bindValue(":username", "$username");
+    }
+    $stmt->execute();
+    return $stmt->fetch();
+}
 
 /**
  * @param $query
@@ -78,20 +95,15 @@ function getAllRecipes($option)
             $query .= " ORDER BY name";
         } else if ($option["option"] === "nyast") {
             $query .= " ORDER BY id DESC";
-        }
-        else if ($option["option"] === "maträtter") {
+        } else if ($option["option"] === "maträtter") {
             $query .= " WHERE category = 'Maträtter'";
-        }
-        else if ($option["option"] === "efterrätter") {
+        } else if ($option["option"] === "efterrätter") {
             $query .= " WHERE category = 'Efterrätter'";
-        }
-        else if ($option["option"] === "bakverk") {
+        } else if ($option["option"] === "bakverk") {
             $query .= " WHERE category = 'Bakverk'";
-        }
-        else if ($option["option"] === "drycker") {
+        } else if ($option["option"] === "drycker") {
             $query .= " WHERE category = 'Drycker'";
-        }
-        else if ($option["option"] === "sökning") {
+        } else if ($option["option"] === "sökning") {
             $query .= " WHERE name LIKE :search";
 
             for ($i = 1; $i < 10; $i++) {
@@ -200,6 +212,10 @@ function runQuery($query)
     $stmt->execute();
 }
 
+function signup()
+{
+}
+
 /**
  * @param $data
  * @param $img
@@ -207,7 +223,6 @@ function runQuery($query)
  */
 function storeRecipe($data, $img)
 {
-    var_dump($data);
     $names = array();
     $ingredients = array();
     $instructions = array();
@@ -258,7 +273,7 @@ function storeRecipe($data, $img)
         } else if ($portionsExist === 0) {
             array_push($names, [$key => $value]);
         } else if ($categoryExist === 0) {
-                array_push($names, [$key => $value]);
+            array_push($names, [$key => $value]);
         } else if ($ingredientExist === 0) {
             array_push($ingredients, [$key => $value]);
         } else if ($instructionExist === 0) {
@@ -266,11 +281,42 @@ function storeRecipe($data, $img)
         }
     }
     resizeImg($img);
-    updateDatabase($query1, $query2, $query3, $names, $ingredients, $instructions, $img);
-    //resizeImg($img);
+    array_push($names, ["img" => $img]);
 
+    $output1 = array();
+    array_push($output1, $query1);
+    array_push($output1, $names);
+
+    $output2 = array();
+    array_push($output2, $query2);
+    array_push($output2, $ingredients);
+
+    $output3 = array();
+    array_push($output3, $query3);
+    array_push($output3, $instructions);
+
+    $result = array();
+
+    array_push($result, $output1);
+    array_push($result, $output2);
+    array_push($result, $output3);
+    updateDatabase($result);
+    //resizeImg($img);
 }
 
+function storeUser($query)
+{
+    $db = connect();
+    $stmt = $db->prepare($query);
+}
+
+function UserQuery()
+{
+    $result = fetchAll("SELECT MAX(id) FROM recipes", null);
+    $id = $result[0]['MAX(id)'] + 1;
+    $query = "INSERT INTO users values ($id,:username,:email,:pwd)";
+    storeUser();
+}
 
 /**
  * @param $query1
@@ -282,39 +328,28 @@ function storeRecipe($data, $img)
  * @param $img
  * @throws Exception
  */
-function updateDatabase($query1, $query2, $query3, $names, $inputIngredients, $inputInstructions, $img)
+function updateDatabase($data)
 {
-    var_dump($names);
     $db = connect();
-    $stmt1 = $db->prepare($query1);
-    $stmt2 = $db->prepare($query2);
-    $stmt3 = $db->prepare($query3);
-    if (!empty($inputIngredients)) {
-        $ingredients = call_user_func_array('array_merge', $inputIngredients);
-    }
-    if (!empty($inputInstructions)) {
-        $instructions = call_user_func_array('array_merge', $inputInstructions);
-    }
-    $stmt1->bindParam(":name", $names[0]["name"]);
-    $stmt1->bindParam(":portions", $names[1]["portions"]);
-    $stmt1->bindParam(":category", $names[2]["category"]);
-    $stmt1->bindParam(":img", $img);
-    if (!empty($ingredients)) {
-        foreach ($ingredients as $key => $value) {
-            $stmt2->bindValue(":$key", $value);
-
+    //var_dump($data);
+    for ($i = 0; $i < 3; $i++) {
+        if (isset($data[$i])) {
+            var_dump($data[$i]);
+            $stmt = $db->prepare($data[$i][0]);
+            if (!empty($data[$i][1])) {
+                $input = call_user_func_array('array_merge', $data[$i][1]);
+                foreach ($input as $key => $item) {
+                    if (!empty($key) && !empty($item)) {
+                        $stmt->bindValue($key, $item);
+                        //var_dump($item);
+                    }
+                }
+            }
+            $stmt->execute();
         }
-    }
-    if (!empty($instructions)) {
-        foreach ($instructions as $key => $value) {
-            $stmt3->bindValue($key, $value);
 
-        }
+
     }
-    $stmt1->execute();
-    $stmt2->execute();
-    $stmt3->execute();
-    resizeImg($img);
 }
 
 
@@ -326,7 +361,6 @@ function updateDatabase($query1, $query2, $query3, $names, $inputIngredients, $i
  */
 function updateRecipe($id, $data, $img)
 {
-    var_dump($data);
     $names = array();
     $ingredients = array();
     $instructions = array();
@@ -370,20 +404,36 @@ function updateRecipe($id, $data, $img)
         $instructionExist = strpos($key, "instruction");
         if ($nameExist === 0) {
             array_push($names, [$key => $value]);
-            echo "1";
         } else if ($portionsExist === 0) {
             array_push($names, [$key => $value]);
-            echo "2";
         } else if ($categoryExist === 0) {
             array_push($names, [$key => $value]);
-            echo "3";
         } else if ($ingredientExist === 0) {
             array_push($ingredients, [$key => $value]);
         } else if ($instructionExist === 0) {
             array_push($instructions, [$key => $value]);
         }
     }
-    updateDatabase($query1, $query2, $query3, $names, $ingredients, $instructions, $img);
+    array_push($names, ["img" => $img]);
+
+    $output1 = array();
+    array_push($output1, $query1);
+    array_push($output1, $names);
+
+    $output2 = array();
+    array_push($output2, $query2);
+    array_push($output2, $ingredients);
+
+    $output3 = array();
+    array_push($output3, $query3);
+    array_push($output3, $instructions);
+
+    $result = array();
+
+    array_push($result, $output1);
+    array_push($result, $output2);
+    array_push($result, $output3);
+    updateDatabase($result);
 
 }
 
