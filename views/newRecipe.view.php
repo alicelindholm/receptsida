@@ -21,17 +21,18 @@
                 <input type="text" class="form-control" name="name" id="name"> <br>
             </label>
             <br> <input type="file" name="img" id="img">
-            <br><label for="portions"><b>Portioner: </b><input type="number" class="form-control" name="portions" id="portions"></label>
+            <br><label for="portions"><b>Portioner: </b><input type="number" class="form-control" name="portions"
+                                                               id="portions"></label>
             <br><label for="category"> Kategori:
                 <select name="category" id="category">
                     <option value="Maträtter">Maträtter</option>
-                    <option value="Maträtter">Efterrätter</option>
-                    <option value="Maträtter">Bakverk</option>
-                    <option value="Maträtter">Drycker</option>
+                    <option value="Efterrätter">Efterrätter</option>
+                    <option value="Bakverk">Bakverk</option>
+                    <option value="Drycker">Drycker</option>
                 </select>
 
             </label>
-
+            <p>Du behöver inte fylla i alla fält.</p>
             <h2>Ingredienser</h2>
             <p> Glöm inte att fylla i mängd!</p>
 
@@ -51,6 +52,16 @@
             <div id="ingredientBox8"></div>
             <div id="ingredientBox9"></div>
             <div id="ingredientBox10"></div>
+            <div id="ingredientBox11"></div>
+            <div id="ingredientBox12"></div>
+            <div id="ingredientBox13"></div>
+            <div id="ingredientBox14"></div>
+            <div id="ingredientBox15"></div>
+            <div id="ingredientBox16"></div>
+            <div id="ingredientBox17"></div>
+            <div id="ingredientBox18"></div>
+            <div id="ingredientBox19"></div>
+            <div id="ingredientBox20"></div>
 
             <input type="button" class="btn btn-secondary" onclick="addIngredient()" value="+"> <label for=""> Lägg till
                 ingrediens</label>
@@ -73,6 +84,16 @@
             <div id="instructionBox8"></div>
             <div id="instructionBox9"></div>
             <div id="instructionBox10"></div>
+            <div id="instructionBox11"></div>
+            <div id="instructionBox12"></div>
+            <div id="instructionBox13"></div>
+            <div id="instructionBox14"></div>
+            <div id="instructionBox15"></div>
+            <div id="instructionBox16"></div>
+            <div id="instructionBox17"></div>
+            <div id="instructionBox18"></div>
+            <div id="instructionBox19"></div>
+            <div id="instructionBox20"></div>
             <input type="button" class="btn btn-secondary" onclick="addInstruction()" value="+"> <label for="">Lägg till
                 instruktion</label>
             <br>

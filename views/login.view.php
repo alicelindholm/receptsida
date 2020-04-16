@@ -12,10 +12,11 @@
     <nav>
         <a href="">
             <img src="icon.jpg" alt="picture">
+        </a>
     </nav>
     <div>
         <form action="/login.inc" method="post">
-            <input type="text" name="username" placeholder="Användarnamn...">
+            <input type="text" name="mailuid" placeholder="Användarnamn...">
             <input type="password" name="pwd" placeholder="Password...">
             <button type="submit" name="login-submit">Logga in</button>
         </form>
