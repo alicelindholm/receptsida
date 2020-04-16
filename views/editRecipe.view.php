@@ -63,6 +63,16 @@
                     <div id="ingredientBox8"></div>
                     <div id="ingredientBox9"></div>
                     <div id="ingredientBox10"></div>
+                    <div id="ingredientBox11"></div>
+                    <div id="ingredientBox12"></div>
+                    <div id="ingredientBox13"></div>
+                    <div id="ingredientBox14"></div>
+                    <div id="ingredientBox15"></div>
+                    <div id="ingredientBox16"></div>
+                    <div id="ingredientBox17"></div>
+                    <div id="ingredientBox18"></div>
+                    <div id="ingredientBox19"></div>
+                    <div id="ingredientBox20"></div>
 
                     <input type="button" class="btn btn-secondary" onclick="addIngredient()" value="+"> <label for="">
                         Lägg till ingrediens</label> <br>
@@ -89,6 +99,16 @@
                     <div id="instructionBox8"></div>
                     <div id="instructionBox9"></div>
                     <div id="instructionBox10"></div>
+                    <div id="instructionBox11"></div>
+                    <div id="instructionBox12"></div>
+                    <div id="instructionBox13"></div>
+                    <div id="instructionBox14"></div>
+                    <div id="instructionBox15"></div>
+                    <div id="instructionBox16"></div>
+                    <div id="instructionBox17"></div>
+                    <div id="instructionBox18"></div>
+                    <div id="instructionBox19"></div>
+                    <div id="instructionBox20"></div>
                     <input type="button" class="btn btn-secondary" onclick="addInstruction()" value="+"> <label for="">Lägg
                         till
                         instruktion</label>

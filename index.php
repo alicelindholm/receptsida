@@ -4,16 +4,22 @@ require "vendor/autoload.php";
 
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
-    $r->addRoute('GET', '/', 'home.php');
-    $r->addRoute('GET', '//', 'home.php');
-    $r->addRoute('GET', '/recept/{id}', 'recipe.php');
-    $r->addRoute('GET', '/nyttRecept', 'newRecipe.php');
-    $r->addRoute('GET', '/redigeraRecept/{id}', 'editRecipe.php');
-    $r->addRoute('POST', '/sparaRecept', 'storeRecipe.php');
-    $r->addRoute('POST', '/uppdateraRecept/{id}', 'updateRecipe.php');
-    $r->addRoute('GET', '/raderaRecept/{id}', 'deleteRecipe.php');
-    $r->addRoute('GET', '/{option}', 'home.php');
-    $r->addRoute('POST', '/sökRecept', 'searchRecipe.php');
+    $r->addRoute('GET', '/[/]', 'controllers/home.php');
+
+    $r->addRoute('GET', '/profil[/]', 'controllers/profile.php');
+    $r->addRoute('GET', '/profil/redigera/{id}[/]', 'controllers/profile.edit.php');
+    $r->addRoute('POST', '/loggain[/]', 'includes/login.inc.php');
+    $r->addRoute('GET', '/skapaKonto[/]', 'controllers/signup.php');
+    $r->addRoute('POST', '/sparaKonto[/]', 'includes/signup.inc.php');
+    $r->addRoute('GET', '/recept/{id}[/]', 'controllers/recipe.php');
+    $r->addRoute('GET', '/nyttRecept[/]', 'controllers/newRecipe.php');
+    $r->addRoute('GET', '/redigeraRecept/{id}[/]', 'controllers/editRecipe.php');
+    $r->addRoute('POST', '/sparaRecept[/]', 'includes/storeRecipe.inc.php');
+    $r->addRoute('POST', '/uppdateraRecept/{id}[/]', 'includes/updateRecipe.inc.php');
+    $r->addRoute('GET', '/raderaRecept/{id}[/]', 'includes/deleteRecipe.inc.php');
+    $r->addRoute('GET', '/{option}[/]', 'controllers/home.php');
+    $r->addRoute('POST', '/loggaUt[/]', 'includes/logout.inc.php');
+    $r->addRoute('POST', '/uppdateraAnvändare[/]', 'includes/updateUser.inc.php');
     // {id} must be a number (\d+)
 });
 
