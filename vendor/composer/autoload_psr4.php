@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Klein\\' => array($vendorDir . '/klein/klein/src/Klein'),
-    'Grafika\\' => array($vendorDir . '/kosinix/grafika/src/Grafika'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'FastRoute\\' => array($vendorDir . '/nikic/fast-route/src'),
 );

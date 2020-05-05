@@ -55,6 +55,9 @@
                             <a class="dropdown-item" href="/drycker">Drycker</a>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/slumpa">Slumpa fram en maträtt</a>
+                    </li>
                 </ul>
                 <form action="/sökning " class="form-inline my-2 my-lg-0" method="get">
                     <input class="form-control mr-sm-2" type="search" name="search" id="search"
@@ -73,11 +76,11 @@
     if (empty($recipes)) {
 
         if (!empty($option) && $option != "") {
-                if ($option["option"] === "sökning") {
-                    echo "<p>Du sökte på: '" . $search . "'</p><p> Din sökning gav tyvärr inga resultat. :( </p>";
-                } else {
-                    echo "<p>Den här kategorin är tyvärr tom. Tryck på plusset för att lägga till ett nytt!</p>";
-                }
+            if ($option["option"] === "sökning") {
+                echo "<p>Du sökte på: '" . $search . "'</p><p> Din sökning gav tyvärr inga resultat. :( </p>";
+            } else {
+                echo "<p>Den här kategorin är tyvärr tom. Tryck på plusset för att lägga till ett nytt!</p>";
+            }
 
         } else {
             ?>

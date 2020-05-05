@@ -11,13 +11,9 @@ class ComposerStaticInit80d92d3d62bd80bd1caf1f6aa2563a1c
     );
 
     public static $prefixLengthsPsr4 = array (
-        'K' => 
+        'P' => 
         array (
-            'Klein\\' => 6,
-        ),
-        'G' => 
-        array (
-            'Grafika\\' => 8,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'F' => 
         array (
@@ -26,13 +22,9 @@ class ComposerStaticInit80d92d3d62bd80bd1caf1f6aa2563a1c
     );
 
     public static $prefixDirsPsr4 = array (
-        'Klein\\' => 
+        'PHPMailer\\PHPMailer\\' => 
         array (
-            0 => __DIR__ . '/..' . '/klein/klein/src/Klein',
-        ),
-        'Grafika\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/kosinix/grafika/src/Grafika',
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'FastRoute\\' => 
         array (

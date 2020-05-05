@@ -7,7 +7,8 @@ if (isset($_SESSION['id'])) {
         $vars = "";
     }
     $option = $vars;
-    $recipes = getAllRecipes($option, $userId);
+    $recipes = getAllChosen($option, $userId);
+
     $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS);
     if (isset($get["search"])) {
         $search = $get["search"];

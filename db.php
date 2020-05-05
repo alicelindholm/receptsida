@@ -88,7 +88,7 @@ function fetchAll($query, $search)
  * @param $option
  * @return array
  */
-function getAllRecipes($option, $userId)
+function getAllChosen($option, $userId)
 {
     $search = null;
     $ids = array();
@@ -122,11 +122,10 @@ function getAllRecipes($option, $userId)
                 if (!empty($id)) {
                     array_push($ids, $id);
                 }
-
             }
             if (!empty($ids)) {
                 foreach ($ids as $key => $value) {
-                    $name = getOneName($value[0]["id"]);
+                    $name = getOneId($value[0]["id"]);
                     array_push($oneDimensionalArray, $name);
                 }
             }
@@ -152,9 +151,32 @@ function getAllRecipes($option, $userId)
             }
         }
     }
-    return $result;
+    $ids = [];
+    foreach ($result as $value) {
+        array_push($ids, $value['id']);
+    }
+    $arrUnique = array_unique($ids);
+    $recipes = getAllRecipes($arrUnique,$userId);
+    return $recipes;
 }
 
+function getAllRecipes($data,$userId)
+{
+    $result= [];
+    foreach($data as $value){
+        $query = "SELECT * FROM recipes WHERE id = $value AND user_id=$userId";
+        array_push($result,fetchAll($query, null));
+    }
+   $recipes = array_reduce($result,'array_merge',array());
+    return $recipes;
+
+}
+
+function getOneId($id)
+{
+    $query = "SELECT id FROM ingredients WHERE id = $id";
+    return fetchAll($query, null);
+}
 
 /**
  * @param $id

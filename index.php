@@ -6,6 +6,7 @@ require "vendor/autoload.php";
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/[/]', 'controllers/home.php');
 
+    $r->addRoute('GET', '/slumpa[/]', 'controllers/random.php');
     $r->addRoute('GET', '/profil[/]', 'controllers/profile.php');
     $r->addRoute('GET', '/profil/redigera/{id}[/]', 'controllers/profile.edit.php');
     $r->addRoute('POST', '/loggain[/]', 'includes/login.inc.php');
