@@ -160,6 +160,11 @@ function getAllChosen($option, $userId)
     return $recipes;
 }
 
+function getAllDines($userId){
+    $query = "Select id from recipes where category = 'Maträtter' and user_id = $userId";
+    return fetchAll($query, null);;
+}
+
 function getAllRecipes($data,$userId)
 {
     $result= [];

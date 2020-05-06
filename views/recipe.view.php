@@ -27,6 +27,32 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/profil">Profil</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Sortera efter
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/namn">Namn</a>
+                        <a class="dropdown-item" href="/nyast">Nyast</a>
+                        <a class="dropdown-item" href="/äldst">Äldst</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Kategorier
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/maträtter">Maträtter</a>
+                        <a class="dropdown-item" href="/efterrätter">Efterrätter</a>
+                        <a class="dropdown-item" href="/bakverk">Bakverk</a>
+                        <a class="dropdown-item" href="/drycker">Drycker</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/slumpa">Slumpa fram en maträtt</a>
+                </li>
             </ul>
             <form action="/logout.inc" method="post">
                 <button type="submit" class="btn btn-secondary" name="logout-submit">Logga ut</button>
